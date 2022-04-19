@@ -5,6 +5,8 @@ import { selectAppLoading } from "../../store/appState/selectors";
 import { fetchAllHikes } from "../../store/hike/actions";
 import { selectAllHikes } from "../../store/hike/selectors";
 import { tags } from "../../config/tags";
+import { noImage } from "../../config/constants";
+import { Grid } from "@mantine/core";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -20,26 +22,35 @@ export default function HomePage() {
     <div>
       <h1>Home</h1>
       <div className="homepage-body">
-        <div className="artwork-list">
+        <Grid>
           {loading
             ? "Loading"
             : hikes.map((hike) => {
-                const { imageUrl, title, description, country, badgeIds } =
-                  hike;
+                const {
+                  coverImage,
+                  title,
+                  description,
+                  country,
+                  badgeIds,
+                  id,
+                } = hike;
                 const badges = tags.filter((tag) => {
                   return badgeIds.includes(tag.id);
                 });
                 return (
-                  <HikeCard
-                    title={title}
-                    image={imageUrl}
-                    description={description}
-                    country={country}
-                    badges={badges}
-                  />
+                  <Grid.Col span={2}>
+                    <HikeCard
+                      key={id}
+                      title={title}
+                      image={coverImage ? coverImage : noImage}
+                      description={description}
+                      country={country}
+                      badges={badges}
+                    />
+                  </Grid.Col>
                 );
               })}
-        </div>
+        </Grid>
       </div>
     </div>
   );
