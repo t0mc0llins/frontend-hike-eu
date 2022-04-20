@@ -21,7 +21,7 @@ export default function HomePage() {
 
   return (
     <div className="homepage-body">
-      <Grid m={20}>
+      <Grid m={20} mt={70}>
         {loading
           ? "Loading"
           : hikes.map((hike) => {

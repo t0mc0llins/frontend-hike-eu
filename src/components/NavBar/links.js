@@ -1,18 +1,18 @@
 export const links = [
   {
-    link: "/about",
-    label: "Features",
+    link: "/mytrips",
+    label: "My Hikes",
   },
   {
-    link: "/pricing",
-    label: "Pricing",
+    link: "/create",
+    label: "Create Hike",
   },
   {
-    link: "/learn",
-    label: "Learn",
+    link: "/explore",
+    label: "Explore",
   },
   {
-    link: "/community",
-    label: "Community",
+    link: "/help",
+    label: "Help",
   },
 ];

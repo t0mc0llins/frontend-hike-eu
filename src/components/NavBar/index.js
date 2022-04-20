@@ -9,6 +9,7 @@ import {
 import { useBooleanToggle } from "@mantine/hooks";
 import { Search } from "tabler-icons-react";
 // import { MantineLogo } from "../../shared/MantineLogo";
+import { ReactComponent as Logo } from "../../images/logo-hike.svg";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -73,11 +74,11 @@ export function NavBar({ links }) {
   ));
 
   return (
-    <Header height={56} className={classes.header} mb={20}>
+    <Header height={56} className={classes.header} mb={20} fixed>
       <div className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
-          {/* <MantineLogo /> */}
+          <Logo style={{ width: 80 }} />
         </Group>
 
         <Group>
