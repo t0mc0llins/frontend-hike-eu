@@ -58,7 +58,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function NavBar({ links }) {
+export function TopBar({ links }) {
   const [opened, toggleOpened] = useBooleanToggle(false);
   const { classes } = useStyles();
 
