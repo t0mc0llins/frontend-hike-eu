@@ -7,6 +7,7 @@ import { selectAllHikes } from "../../store/hike/selectors";
 import { tags } from "../../config/tags";
 import { noImage } from "../../config/constants";
 import { Grid } from "@mantine/core";
+import { countries } from "../../config/countries";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -30,17 +31,19 @@ export default function HomePage() {
                   coverImage,
                   title,
                   description,
-                  country,
+                  countryRef,
                   badgeIds,
                   id,
                 } = hike;
                 const badges = tags.filter((tag) => {
                   return badgeIds.includes(tag.id);
                 });
+                const country = countries.find((country) => {
+                  return countryRef === country.id;
+                });
                 return (
-                  <Grid.Col span={2}>
+                  <Grid.Col key={id} sm={6} md={4} lg={3}>
                     <HikeCard
-                      key={id}
                       title={title}
                       image={coverImage ? coverImage : noImage}
                       description={description}

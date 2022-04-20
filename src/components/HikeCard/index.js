@@ -18,7 +18,18 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
   },
 
-  section: {
+  descriptionSection: {
+    minHeight: 150,
+    borderBottom: `1px solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+    }`,
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
+    paddingBottom: theme.spacing.md,
+  },
+
+  badgeSection: {
+    minHeight: 50,
     borderBottom: `1px solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
@@ -58,19 +69,19 @@ export function HikeCard({ image, title, description, country, badges }) {
         <Image src={image} alt={title} height={180} />
       </Card.Section>
 
-      <Card.Section className={classes.section} mt="md">
+      <Card.Section className={classes.descriptionSection} mt="md">
         <Group position="apart">
           <Text size="lg" weight={500}>
             {title}
           </Text>
-          <Badge size="sm">{country}</Badge>
+          <Badge size="sm">{country.name}</Badge>
         </Group>
         <Text size="sm" mt="xs">
           {description}
         </Text>
       </Card.Section>
 
-      <Card.Section className={classes.section}>
+      <Card.Section className={classes.badgeSection}>
         <Text mt="md" className={classes.label} color="dimmed">
           Perfect for you, if you enjoy
         </Text>
