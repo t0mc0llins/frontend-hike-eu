@@ -20,41 +20,38 @@ export default function HomePage() {
   const hikes = useSelector(selectAllHikes);
 
   return (
-    <div>
-      <h1>Home</h1>
-      <div className="homepage-body">
-        <Grid>
-          {loading
-            ? "Loading"
-            : hikes.map((hike) => {
-                const {
-                  coverImage,
-                  title,
-                  description,
-                  countryRef,
-                  badgeIds,
-                  id,
-                } = hike;
-                const badges = tags.filter((tag) => {
-                  return badgeIds.includes(tag.id);
-                });
-                const country = countries.find((country) => {
-                  return countryRef === country.id;
-                });
-                return (
-                  <Grid.Col key={id} sm={6} md={4} lg={3}>
-                    <HikeCard
-                      title={title}
-                      image={coverImage ? coverImage : noImage}
-                      description={description}
-                      country={country}
-                      badges={badges}
-                    />
-                  </Grid.Col>
-                );
-              })}
-        </Grid>
-      </div>
+    <div className="homepage-body">
+      <Grid m={20}>
+        {loading
+          ? "Loading"
+          : hikes.map((hike) => {
+              const {
+                coverImage,
+                title,
+                description,
+                countryRef,
+                badgeIds,
+                id,
+              } = hike;
+              const badges = tags.filter((tag) => {
+                return badgeIds.includes(tag.id);
+              });
+              const country = countries.find((country) => {
+                return countryRef === country.id;
+              });
+              return (
+                <Grid.Col key={id} sm={6} md={4} lg={3}>
+                  <HikeCard
+                    title={title}
+                    image={coverImage ? coverImage : noImage}
+                    description={description}
+                    country={country}
+                    badges={badges}
+                  />
+                </Grid.Col>
+              );
+            })}
+      </Grid>
     </div>
   );
 }
