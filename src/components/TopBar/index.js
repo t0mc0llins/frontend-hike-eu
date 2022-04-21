@@ -74,11 +74,11 @@ export function TopBar({ links }) {
   ));
 
   return (
-    <Header height={56} className={classes.header} mb={20} fixed>
+    <Header className={classes.header}>
       <div className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
-          <Logo style={{ width: 80 }} />
+          <Logo style={{ width: 80, height: 57 }} />
         </Group>
 
         <Group>

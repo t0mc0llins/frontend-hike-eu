@@ -20,8 +20,8 @@ export default function HomePage() {
   const hikes = useSelector(selectAllHikes);
 
   return (
-    <div className="homepage-body">
-      <Grid m={20} mt={70}>
+    <div className="homepage-body" style={{ display: "flex", width: "100%" }}>
+      <Grid pt={20} width={300}>
         {loading
           ? "Loading"
           : hikes.map((hike) => {
@@ -37,14 +37,18 @@ export default function HomePage() {
                 return badgeIds.includes(tag.id);
               });
               const country = countries.find((country) => {
-                return countryRef === country.id;
+                return countryRef === country.value;
               });
+              let summaryDescription = description;
+              description.length > 150
+                ? (summaryDescription = `${description.substring(0, 150)}...`)
+                : (summaryDescription = description);
               return (
                 <Grid.Col key={id} sm={6} md={4} lg={3}>
                   <HikeCard
                     title={title}
                     image={coverImage ? coverImage : noImage}
-                    description={description}
+                    description={summaryDescription}
                     country={country}
                     badges={badges}
                   />

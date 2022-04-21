@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   descriptionSection: {
-    minHeight: 150,
+    minHeight: 200,
     borderBottom: `1px solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   badgeSection: {
-    minHeight: 50,
+    minHeight: 70,
     borderBottom: `1px solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
@@ -74,7 +74,7 @@ export function HikeCard({ image, title, description, country, badges }) {
           <Text size="lg" weight={500}>
             {title}
           </Text>
-          <Badge size="sm">{country.name}</Badge>
+          <Badge size="sm">{country.label}</Badge>
         </Group>
         <Text size="sm" mt="xs">
           {description}
