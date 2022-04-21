@@ -1,10 +1,10 @@
 import { MultiSelect } from "@mantine/core";
-import { countries } from "../../config/countries";
+import { countriesEmoji } from "../../config/countries-emoji";
 
 export default function CountrySelect() {
   return (
     <MultiSelect
-      data={countries.map((c) => {
+      data={countriesEmoji.map((c) => {
         return c.label;
       })}
       placeholder="Where would you like to go?"
