@@ -1,8 +1,16 @@
 import { CheckboxGroup, Checkbox } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSeasonFilters } from "../../store/filter/actions";
 
 export default function SeasonSelect() {
   const [seasons, setSeasons] = useState(["0", "1", "2", "3"]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSeasonFilters(seasons));
+  }, [seasons, dispatch]);
+
   return (
     <CheckboxGroup value={seasons} onChange={setSeasons}>
       <Checkbox value="0" label="Spring" />
