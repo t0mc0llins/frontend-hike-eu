@@ -1,16 +1,26 @@
 import { MultiSelect } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { countriesEmoji } from "../../config/countries-emoji";
+import { setCountryFilters } from "../../store/filter/actions";
 
 export default function CountrySelect() {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState([]);
+
+  useEffect(() => {
+    dispatch(setCountryFilters(value));
+  }, [value, dispatch]);
+
   return (
     <MultiSelect
-      data={countriesEmoji.map((c) => {
-        return c.label;
-      })}
+      data={countriesEmoji}
       placeholder="Where would you like to go?"
       searchable
       clearable
       nothingFound="Nothing found"
+      value={value}
+      onChange={setValue}
     />
   );
 }

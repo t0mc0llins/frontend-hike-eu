@@ -44,7 +44,7 @@ export default function HomePage() {
                 ? (summaryDescription = `${description.substring(0, 150)}...`)
                 : (summaryDescription = description);
               return (
-                <Grid.Col key={id} sm={6} md={4} lg={3}>
+                <Grid.Col key={id} sm={6} md={4} lg={3} xl={2}>
                   <HikeCard
                     title={title}
                     image={coverImage ? coverImage : noImage}

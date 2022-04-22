@@ -4,7 +4,7 @@ const initialState = {
   mainList: [],
 };
 
-export default function artworkSliceReducer(state = initialState, action) {
+export default function hikeSliceReducer(state = initialState, action) {
   switch (action.type) {
     case all_hikes_fetched: {
       return {
