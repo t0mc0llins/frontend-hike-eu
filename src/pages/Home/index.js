@@ -8,23 +8,58 @@ import { tags } from "../../config/tags";
 import { noImage } from "../../config/constants";
 import { Grid } from "@mantine/core";
 import { countries } from "../../config/countries";
+import {
+  selectCountryFilter,
+  selectDayFilter,
+  selectSeasonFilter,
+} from "../../store/filter/selectors";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const loading = useSelector(selectAppLoading);
+  const allHikes = useSelector(selectAllHikes);
+  const filterCountries = useSelector(selectCountryFilter);
+  const filterDays = useSelector(selectDayFilter);
+  const filterSeasons = useSelector(selectSeasonFilter);
 
   useEffect(() => {
     dispatch(fetchAllHikes);
   }, [dispatch]);
 
-  const hikes = useSelector(selectAllHikes);
+  let filteredHikes = allHikes;
+
+  if (filterCountries.length !== 0) {
+    filteredHikes = allHikes.filter((h) => {
+      return filterCountries.includes(h.countryRef);
+    });
+  }
+
+  if (filterDays === "2") {
+    filteredHikes = filteredHikes.filter((h) => {
+      return h.days.length > 1;
+    });
+  } else if (filterDays === "1") {
+    filteredHikes = filteredHikes.filter((h) => {
+      return h.days.length === 1;
+    });
+  }
+
+  filteredHikes = filteredHikes.filter((h) => {
+    let present = false;
+    for (let i = 0; i < filterSeasons.length; i++) {
+      if (h.seasonRefs.includes(parseInt(filterSeasons[i]))) {
+        return (present = true);
+      }
+    }
+    return present;
+  });
 
   return (
     <div className="homepage-body" style={{ display: "flex", width: "100%" }}>
       <Grid pt={20} width={300}>
         {loading
           ? "Loading"
-          : hikes.map((hike) => {
+          : filteredHikes.map((hike) => {
               const {
                 coverImage,
                 title,
