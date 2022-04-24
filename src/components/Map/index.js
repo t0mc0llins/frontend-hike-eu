@@ -1,15 +1,21 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
+import { useSelector } from "react-redux";
 import PolylineMeasurer from "../../config/polyline/PolylineMeasurer";
+import { selectCurrentMap } from "../../store/hike/selectors";
 import { polylines } from "./data";
 
 const Map = () => {
+  const map = useSelector(selectCurrentMap);
+  const { center, minZoom, maxBoundLat, maxBoundLng } = map;
   return (
     <MapContainer
       doubleClickZoom={false}
       id="mapId"
-      zoom={7}
-      center={[20.27, -157]}
+      zoom={minZoom}
+      center={center}
+      minZoom={minZoom}
+      maxBounds={[maxBoundLat, maxBoundLng]}
       style={{ height: "100%", width: "100%" }}
     >
       <TileLayer

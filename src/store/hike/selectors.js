@@ -9,3 +9,5 @@ export const selectSearchableHikes = (reduxState) =>
     };
   });
 export const selectCurrentHike = (reduxState) => reduxState.hike.selectedHike;
+export const selectCurrentMap = (reduxState) =>
+  reduxState.hike.selectedHike.map;

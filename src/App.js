@@ -9,6 +9,7 @@ import HikePage from "./pages/HikePage";
 import HomePage from "./pages/Home";
 import { getUserWithStoredToken } from "./store/user/actions";
 import "./App.css";
+import CreatePage from "./pages/CreatePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/hike/:id" element={<HikePage />} />
+        <Route path="/hike/create" element={<CreatePage />} />
       </Routes>
     </AppShell>
   );
