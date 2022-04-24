@@ -8,3 +8,4 @@ export const selectSearchableHikes = (reduxState) =>
       country: countries.find((c) => c.value === h.countryRef).label,
     };
   });
+export const selectCurrentHike = (reduxState) => reduxState.hike.selectedHike;

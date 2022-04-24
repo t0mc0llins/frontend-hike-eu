@@ -5,8 +5,10 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { TopBar } from "./components/TopBar";
 import { links } from "./components/TopBar/links";
+import HikePage from "./pages/HikePage";
 import HomePage from "./pages/Home";
 import { getUserWithStoredToken } from "./store/user/actions";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/hike/:id" element={<HikePage />} />
       </Routes>
     </AppShell>
   );

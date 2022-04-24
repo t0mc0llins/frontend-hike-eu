@@ -1,7 +1,8 @@
-import { all_hikes_fetched } from "./types";
+import { all_hikes_fetched, fetch_hike } from "./types";
 
 const initialState = {
   mainList: [],
+  selectedHike: {},
 };
 
 export default function hikeSliceReducer(state = initialState, action) {
@@ -10,6 +11,12 @@ export default function hikeSliceReducer(state = initialState, action) {
       return {
         ...state,
         mainList: [...action.payload],
+      };
+    }
+    case fetch_hike: {
+      return {
+        ...state,
+        selectedHike: { ...action.payload },
       };
     }
     default: {
