@@ -17,7 +17,7 @@ const initialBounds = [
   [72.3153, 60.6445],
 ];
 
-function DisplayPosition({ map }) {
+function DisplayPosition({ map }, nextStep) {
   const [bounds, setMapBounds] = useState(() => map.getBounds());
   const [zoom, setMapZoom] = useState(() => map.getZoom());
   const [center, setMapCenter] = useState(() => map.getCenter());
@@ -53,7 +53,6 @@ function DisplayPosition({ map }) {
 
   const saveRoute = useCallback(() => {
     dispatch(saveMap(2));
-    // navigate(back)
     dispatch(resetMapView());
     dispatch(deletePolyline());
   }, [dispatch]);
@@ -99,7 +98,7 @@ function DisplayPosition({ map }) {
       latitude: {center.lat.toFixed(4)}, longitude: {center.lng.toFixed(4)}{" "}
       <button onClick={reset}>Reset</button>{" "}
       <button onClick={setMap}>Set map</button>
-      <button onClick={saveRoute}>Save & exit</button>
+      <button onClick={saveRoute}>Save map</button>
     </p>
   );
 }
@@ -116,7 +115,7 @@ export default function CreateMap() {
         scrollWheelZoom={true}
         maxBounds={initialBounds}
         ref={setMap}
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: 800, width: "100%" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -133,7 +132,7 @@ export default function CreateMap() {
   );
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div>
       {map ? <DisplayPosition map={map} /> : null}
       {displayMap}
     </div>

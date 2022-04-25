@@ -8,6 +8,7 @@ const {
   reset_map_view,
   make_polyline,
   delete_polyline,
+  submitted_map,
 } = require("./types");
 
 export function setMapView(map) {
@@ -36,6 +37,12 @@ export function deletePolyline() {
   };
 }
 
+function submittedMap() {
+  return {
+    type: submitted_map,
+  };
+}
+
 export function saveMap(hikeId) {
   return async function thunk(dispatch, getState) {
     const map = selectMap(getState());
@@ -56,6 +63,7 @@ export function saveMap(hikeId) {
         polylineArr,
         hikeId,
       });
+      dispatch(submittedMap());
       dispatch(appDoneLoading());
     } catch (error) {
       console.log(error.message);

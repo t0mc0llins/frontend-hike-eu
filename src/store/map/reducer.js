@@ -3,6 +3,7 @@ import {
   make_polyline,
   reset_map_view,
   set_map_view,
+  submitted_map,
 } from "./types";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   maxBoundSouthWest: [],
   maxBoundNorthEast: [],
   polylineArr: [],
+  submitted: false,
 };
 
 export default function mapSliceReducer(state = initialState, action) {
@@ -26,6 +28,7 @@ export default function mapSliceReducer(state = initialState, action) {
     }
     case reset_map_view: {
       return {
+        ...state,
         minZoom: initialState.zoom,
         center: initialState.center,
         maxBoundSouthWest: initialState.maxBoundSouthWest,
@@ -43,6 +46,12 @@ export default function mapSliceReducer(state = initialState, action) {
       return {
         ...state,
         polylineArr: initialState.polylineArr,
+      };
+    }
+    case submitted_map: {
+      return {
+        ...state,
+        submitted: true,
       };
     }
     default: {
