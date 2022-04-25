@@ -3,6 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { useDispatch } from "react-redux";
 import PolylineMeasurer from "../../config/polyline/PolylineMeasurer";
 import {
+  deletePolyline,
   makePolyline,
   resetMapView,
   setMapView,
@@ -37,15 +38,13 @@ function DisplayPosition({ map }) {
         parseFloat(center.lat.toFixed(4)),
         parseFloat(center.lng.toFixed(4)),
       ],
-      bounds: [
-        [
-          parseFloat(bounds._southWest.lat.toFixed(4)),
-          parseFloat(bounds._southWest.lng.toFixed(4)),
-        ],
-        [
-          parseFloat(bounds._northEast.lat.toFixed(4)),
-          parseFloat(bounds._northEast.lng.toFixed(4)),
-        ],
+      maxBoundSouthWest: [
+        parseFloat(bounds._southWest.lat.toFixed(4)),
+        parseFloat(bounds._southWest.lng.toFixed(4)),
+      ],
+      maxBoundNorthEast: [
+        parseFloat(bounds._northEast.lat.toFixed(4)),
+        parseFloat(bounds._northEast.lng.toFixed(4)),
       ],
     };
     dispatch(setMapView(mapPayload));
@@ -81,12 +80,19 @@ function DisplayPosition({ map }) {
     };
   }, [map]);
 
+  useEffect(() => {
+    function clearPolyline() {
+      dispatch(deletePolyline());
+    }
+    map.on("polylinemeasure:clear", clearPolyline);
+    return () => {
+      map.off("polylinemeasure:clear", clearPolyline);
+    };
+  }, [map]);
+
   return (
     <p>
       latitude: {center.lat.toFixed(4)}, longitude: {center.lng.toFixed(4)}{" "}
-      {/* bounds: {bounds._southWest.lat.toFixed(4)}{" "}
-      {bounds._southWest.lng.toFixed(4)} {bounds._northEast.lat.toFixed(4)}
-      {bounds._northEast.lng.toFixed(4)} zoom: {zoom}{" "} */}
       <button onClick={reset}>Reset</button>{" "}
       <button onClick={setMap}>Set map</button>
     </p>

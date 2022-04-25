@@ -7,7 +7,7 @@ import { polylines } from "./data";
 
 const Map = () => {
   const map = useSelector(selectCurrentMap);
-  const { center, minZoom, maxBoundLat, maxBoundLng } = map;
+  const { center, minZoom, maxBoundSouthWest, maxBoundNorthEast } = map;
   return (
     <MapContainer
       doubleClickZoom={false}
@@ -15,7 +15,7 @@ const Map = () => {
       zoom={minZoom}
       center={center}
       minZoom={minZoom}
-      maxBounds={[maxBoundLat, maxBoundLng]}
+      maxBounds={[maxBoundSouthWest, maxBoundNorthEast]}
       style={{ height: "100%", width: "100%" }}
     >
       <TileLayer

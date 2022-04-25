@@ -1,9 +1,15 @@
-import { make_polyline, reset_map_view, set_map_view } from "./types";
+import {
+  delete_polyline,
+  make_polyline,
+  reset_map_view,
+  set_map_view,
+} from "./types";
 
 const initialState = {
-  zoom: null,
+  minZoom: null,
   center: [],
-  bounds: [],
+  maxBoundSouthWest: [],
+  maxBoundNorthEast: [],
   polylineArr: [],
 };
 
@@ -12,16 +18,18 @@ export default function mapSliceReducer(state = initialState, action) {
     case set_map_view: {
       return {
         ...state,
-        zoom: action.payload.zoom,
+        minZoom: action.payload.zoom,
         center: action.payload.center,
-        bounds: action.payload.bounds,
+        maxBoundSouthWest: action.payload.maxBoundSouthWest,
+        maxBoundNorthEast: action.payload.maxBoundNorthEast,
       };
     }
     case reset_map_view: {
       return {
-        zoom: initialState.zoom,
+        minZoom: initialState.zoom,
         center: initialState.center,
-        bounds: initialState.bounds,
+        maxBoundSouthWest: initialState.maxBoundSouthWest,
+        maxBoundNorthEast: initialState.maxBoundNorthEast,
         polylineArr: initialState.polylineArr,
       };
     }
@@ -29,6 +37,12 @@ export default function mapSliceReducer(state = initialState, action) {
       return {
         ...state,
         polylineArr: action.payload,
+      };
+    }
+    case delete_polyline: {
+      return {
+        ...state,
+        polylineArr: initialState.polylineArr,
       };
     }
     default: {
