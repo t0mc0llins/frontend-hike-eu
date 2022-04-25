@@ -6,6 +6,7 @@ import {
   deletePolyline,
   makePolyline,
   resetMapView,
+  saveMap,
   setMapView,
 } from "../../store/map/actions";
 
@@ -51,8 +52,11 @@ function DisplayPosition({ map }) {
   }, [map, bounds, zoom, dispatch, center.lat, center.lng]);
 
   const saveRoute = useCallback(() => {
+    dispatch(saveMap(2));
+    // navigate(back)
     dispatch(resetMapView());
-  }, [map, dispatch]);
+    dispatch(deletePolyline());
+  }, [dispatch]);
 
   const onMove = useCallback(() => {
     setMapBounds(map.getBounds());
@@ -95,6 +99,7 @@ function DisplayPosition({ map }) {
       latitude: {center.lat.toFixed(4)}, longitude: {center.lng.toFixed(4)}{" "}
       <button onClick={reset}>Reset</button>{" "}
       <button onClick={setMap}>Set map</button>
+      <button onClick={saveRoute}>Save & exit</button>
     </p>
   );
 }
