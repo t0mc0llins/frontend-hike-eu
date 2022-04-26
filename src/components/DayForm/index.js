@@ -2,15 +2,17 @@ import { Box, Button, Group, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { showStageForm } from "../../store/appState/actions";
+import { selectShowStageForm } from "../../store/appState/selectors";
 import { submitDay } from "../../store/form/actions";
-import { selectDays } from "../../store/form/selectors";
 import StageForm from "../StageForm";
+import { selectDays } from "../../store/form/selectors";
 
 export default function DayForm() {
   const dispatch = useDispatch();
   const [saved, setSaved] = useState(false);
+  const stageForm = useSelector(selectShowStageForm);
   const days = useSelector(selectDays);
-  const [showForm, setShowForm] = useState(false);
 
   const form = useForm({
     initialValues: {
@@ -22,6 +24,8 @@ export default function DayForm() {
   const submitDayForm = (values) => {
     dispatch(submitDay(values));
     setSaved(true);
+    dispatch(showStageForm(true));
+    form.reset();
   };
 
   return (
@@ -47,21 +51,30 @@ export default function DayForm() {
       {saved ? (
         <Box>
           <Title>Stages</Title>
-          {/* map existing stages */}
-          {!days[days.length - 1].stages ||
-          days[days.length - 1].stages.length === 0 ? (
+          {days[days.length - 1].stages &&
+          days[days.length - 1].stages.length !== 0 ? (
+            days[days.length - 1].stages.map((s) => {
+              return (
+                <Box key={s.stageOrder}>
+                  Stage {s.stageOrder}: {s.title}
+                </Box>
+              );
+            })
+          ) : (
+            <></>
+          )}
+          {stageForm ? (
             <StageForm />
           ) : (
             <Box>
               <Button
                 type="button"
                 onClick={() => {
-                  setShowForm(true);
+                  dispatch(showStageForm(true));
                 }}
               >
                 Add stage
               </Button>
-              {showForm ? <StageForm /> : <></>}
             </Box>
           )}
         </Box>

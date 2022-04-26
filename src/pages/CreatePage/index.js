@@ -37,7 +37,7 @@ export default function CreatePage() {
         </Stepper.Step>
         <Stepper.Step
           label="Final step"
-          description="Add descriptions and photos"
+          description="Add days and hike stages"
           allowStepSelect={active > 2}
         >
           <DetailForm />
@@ -48,7 +48,7 @@ export default function CreatePage() {
       </Stepper>
 
       <Group position="center" mt="xl">
-        {active !== 0 ? (
+        {active === 1 ? (
           <Button disabled={mapSubmitted ? false : true} onClick={nextStep}>
             Next step
           </Button>

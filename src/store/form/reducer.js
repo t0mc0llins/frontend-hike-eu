@@ -43,6 +43,7 @@ export default function formSliceReducer(state = initialState, action) {
         elevation: action.payload.elevation,
         startLocation: action.payload.startLocation,
         endLocation: action.payload.endLocation,
+        stageOrder: action.payload.stageOrder,
       };
       const days = state.days;
       const day = state.days[state.days.length - 1];

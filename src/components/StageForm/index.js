@@ -1,8 +1,9 @@
 import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
+import { showStageForm } from "../../store/appState/actions";
 import { submitStage } from "../../store/form/actions";
-import { selectDays } from "../../store/form/selectors";
+import { latestStages, selectDays } from "../../store/form/selectors";
 
 export default function StageForm() {
   const dispatch = useDispatch();
@@ -20,8 +21,13 @@ export default function StageForm() {
     },
   });
 
+  const lastStage = useSelector(latestStages);
+
   const submitStageForm = (values) => {
-    dispatch(submitStage(values));
+    const orderedValues = { ...values, stageOrder: lastStage.length + 1 };
+    dispatch(submitStage(orderedValues));
+    dispatch(showStageForm(false));
+    form.reset();
   };
 
   return (
