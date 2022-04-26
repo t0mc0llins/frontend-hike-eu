@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { submitDay } from "../../store/form/actions";
 import { selectDays } from "../../store/form/selectors";
+import StageForm from "../StageForm";
 
 export default function DayForm() {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ export default function DayForm() {
     <>
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form onSubmit={form.onSubmit((values) => submitDayForm(values))}>
-          <DayForm form={form} />
           <Group position="right" mt="md">
             <TextInput
               description="Optional, days will be titled day 1, day 2 etc by default"
@@ -48,7 +48,8 @@ export default function DayForm() {
         <Box>
           <Title>Stages</Title>
           {/* map existing stages */}
-          {days[days.length - 1].stages.length === 0 ? (
+          {!days[days.length - 1].stages ||
+          days[days.length - 1].stages.length === 0 ? (
             <StageForm />
           ) : (
             <Box>

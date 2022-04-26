@@ -1,4 +1,4 @@
-import { set_hike_details, submit_day } from "./types";
+import { set_hike_details, submit_day, submit_stage } from "./types";
 
 const initialState = {
   hikeId: null,
@@ -32,6 +32,28 @@ export default function formSliceReducer(state = initialState, action) {
             stages: [],
           },
         ],
+      };
+    }
+    case submit_stage: {
+      const newStage = {
+        title: action.payload.stageTitle,
+        description: action.payload.stageDescription,
+        distance: action.payload.distance,
+        duration: action.payload.duration,
+        elevation: action.payload.elevation,
+        startLocation: action.payload.startLocation,
+        endLocation: action.payload.endLocation,
+      };
+      const days = state.days;
+      const day = state.days[state.days.length - 1];
+      const stages = state.days[state.days.length - 1].stages;
+      stages.push(newStage);
+      const newDay = { ...day, stages: stages };
+      days.pop();
+      days.push(newDay);
+      return {
+        ...state,
+        days: days,
       };
     }
     default: {

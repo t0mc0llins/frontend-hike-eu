@@ -5,6 +5,7 @@ import HikeForm from "../../components/HikeForm";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMapSubmitted } from "../../store/map/selectors";
 import { incrementStepper } from "../../store/appState/actions";
+import DetailForm from "../../components/DetailForm";
 
 export default function CreatePage() {
   const [active, setActive] = useState(0);
@@ -39,7 +40,7 @@ export default function CreatePage() {
           description="Add descriptions and photos"
           allowStepSelect={active > 2}
         >
-          Step 3 content: Get full access
+          <DetailForm />
         </Stepper.Step>
         <Stepper.Completed>
           Completed, click back button to get to previous step

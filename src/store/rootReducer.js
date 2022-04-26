@@ -4,6 +4,7 @@ import user from "./user/reducer";
 import hike from "./hike/reducer";
 import filter from "./filter/reducer";
 import map from "./map/reducer";
+import form from "./form/reducer";
 
 export default combineReducers({
   appState,
@@ -11,4 +12,5 @@ export default combineReducers({
   hike,
   filter,
   map,
+  form,
 });
