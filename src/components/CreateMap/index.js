@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PolylineMeasurer from "../../config/polyline/PolylineMeasurer";
+import { selectHikeId } from "../../store/form/selectors";
 import {
   deletePolyline,
   makePolyline,
@@ -17,11 +18,12 @@ const initialBounds = [
   [72.3153, 60.6445],
 ];
 
-function DisplayPosition({ map }, nextStep) {
+function DisplayPosition({ map }) {
   const [bounds, setMapBounds] = useState(() => map.getBounds());
   const [zoom, setMapZoom] = useState(() => map.getZoom());
   const [center, setMapCenter] = useState(() => map.getCenter());
   const dispatch = useDispatch();
+  const hikeId = useSelector(selectHikeId);
 
   const reset = useCallback(() => {
     map.setMinZoom(initialZoom);
@@ -52,10 +54,10 @@ function DisplayPosition({ map }, nextStep) {
   }, [map, bounds, zoom, dispatch, center.lat, center.lng]);
 
   const saveRoute = useCallback(() => {
-    dispatch(saveMap(2));
+    dispatch(saveMap(hikeId));
     dispatch(resetMapView());
     dispatch(deletePolyline());
-  }, [dispatch]);
+  }, [dispatch, hikeId]);
 
   const onMove = useCallback(() => {
     setMapBounds(map.getBounds());

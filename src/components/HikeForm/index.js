@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { apiUrl } from "../../config/constants";
 import { countriesEmoji } from "../../config/countries-emoji";
 import { appDoneLoading, appLoading } from "../../store/appState/actions";
+import { setHikeDetails } from "../../store/form/actions";
 
 export default function HikeForm(props) {
   const [hikeFormat, setHikeFormat] = useState("loop");
@@ -51,7 +52,13 @@ export default function HikeForm(props) {
         coverImage: image,
         userId: 1,
       });
-      console.log(response);
+      dispatch(
+        setHikeDetails({
+          hikeId: response.data.id,
+          title: response.data.title,
+          description: response.data.description,
+        })
+      );
       props.nextStep();
       // dispatch(showMessageWithTimeout("success", true, "auction started"));
       dispatch(appDoneLoading());
