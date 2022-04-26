@@ -1,12 +1,20 @@
-import { Box, Button, Title } from "@mantine/core";
+import { Box, Button, Text, Title } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveForm } from "../../store/form/actions";
-import { selectDays } from "../../store/form/selectors";
+import { selectDays, selectSubmitable } from "../../store/form/selectors";
 import DayForm from "../DayForm";
 
 export default function DetailForm() {
   const days = useSelector(selectDays);
   const dispatch = useDispatch();
+  const submitable = useSelector(selectSubmitable);
+
+  // useEffect(() => {
+  //   !days || days.length === 0 || days[days.length - 1].stages.length === 0
+  //     ? setSubmitable(false)
+  //     : setSubmitable(true);
+  // }, [days]);
 
   return (
     <Box>
@@ -21,20 +29,18 @@ export default function DetailForm() {
           );
         })
       ) : (
-        <></>
+        <Text>No days added yet</Text>
       )}
       <DayForm />
-      <Box>
+      <Box key={days}>
         <Button
-          disabled={
-            !days ||
-            days.length === 0 ||
-            days[days.length - 1].stages.length === 0
-          }
+          disabled={submitable}
           onClick={() => {
             dispatch(saveForm());
           }}
-        ></Button>
+        >
+          Submit hike
+        </Button>
       </Box>
     </Box>
   );

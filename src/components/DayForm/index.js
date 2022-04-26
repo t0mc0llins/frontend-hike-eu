@@ -1,4 +1,4 @@
-import { Box, Button, Group, TextInput, Title } from "@mantine/core";
+import { Box, Button, Group, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +61,7 @@ export default function DayForm() {
               );
             })
           ) : (
-            <></>
+            <Text>This day doesn't have any stages yet</Text>
           )}
           {stageForm ? (
             <StageForm />
