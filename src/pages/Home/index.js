@@ -68,9 +68,11 @@ export default function HomePage() {
                 badgeIds,
                 id,
               } = hike;
-              const badges = tags.filter((tag) => {
-                return badgeIds.includes(tag.id);
-              });
+              const badges = badgeIds
+                ? tags.filter((tag) => {
+                    return badgeIds.includes(tag.id);
+                  })
+                : tags;
               const country = countries.find((country) => {
                 return countryRef === country.value;
               });

@@ -41,7 +41,7 @@ export default function HikeForm(props) {
       end === "" || hikeFormat === "loop"
         ? (endLocation = start)
         : (endLocation = end);
-      await axios.post(`${apiUrl}/hikes/create`, {
+      const response = await axios.post(`${apiUrl}/hikes/create`, {
         title,
         description,
         countryRef: country,
@@ -51,6 +51,7 @@ export default function HikeForm(props) {
         coverImage: image,
         userId: 1,
       });
+      console.log(response);
       props.nextStep();
       // dispatch(showMessageWithTimeout("success", true, "auction started"));
       dispatch(appDoneLoading());
