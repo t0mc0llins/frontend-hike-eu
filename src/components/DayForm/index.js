@@ -1,4 +1,12 @@
-import { Box, Button, Group, Text, TextInput, Title } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  Text,
+  Textarea,
+  TextInput,
+  Title,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,19 +40,27 @@ export default function DayForm() {
     <>
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form onSubmit={form.onSubmit((values) => submitDayForm(values))}>
-          <Group position="right" mt="md">
+          <Group position="left" mt="md">
             <TextInput
-              description="Optional, days will be titled day 1, day 2 etc by default"
+              description="An interesting title"
+              required
               label="Title"
               placeholder="day 1"
               {...form.getInputProps("dayTitle", { withError: false })}
             />
-            <TextInput
+            <Textarea
               label="Description"
               placeholder="more details"
               {...form.getInputProps("dayDescription", { withError: false })}
             />
-            <Button type="submit">Save day</Button>
+            <Button
+              type="submit"
+              disabled={
+                days.length !== 0 && days[days.length - 1].stages.length === 0
+              }
+            >
+              Save day
+            </Button>
           </Group>
         </form>
       </Box>
@@ -55,9 +71,9 @@ export default function DayForm() {
           days[days.length - 1].stages.length !== 0 ? (
             days[days.length - 1].stages.map((s) => {
               return (
-                <Box key={s.stageOrder}>
+                <Text key={s.stageOrder}>
                   Stage {s.stageOrder}: {s.title}
-                </Box>
+                </Text>
               );
             })
           ) : (

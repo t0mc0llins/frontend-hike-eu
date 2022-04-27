@@ -1,13 +1,19 @@
-import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  NumberInput,
+  Textarea,
+  TextInput,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
 import { showStageForm } from "../../store/appState/actions";
 import { submitStage } from "../../store/form/actions";
-import { latestStages, selectDays } from "../../store/form/selectors";
+import { latestStages } from "../../store/form/selectors";
 
 export default function StageForm() {
   const dispatch = useDispatch();
-  const days = useSelector(selectDays);
 
   const form = useForm({
     initialValues: {
@@ -33,14 +39,14 @@ export default function StageForm() {
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => submitStageForm(values))}>
-        <Group position="right" mt="md">
+        <Group position="left" mt="md">
           <TextInput
             description="Optional, days will be titled stage 1, stage 2 etc by default"
             label="Title"
             placeholder="day 1"
             {...form.getInputProps("stageTitle", { withError: false })}
           />
-          <TextInput
+          <Textarea
             label="Description"
             placeholder="more details"
             required

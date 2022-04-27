@@ -1,3 +1,4 @@
+import { Button, Group } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import {
   saveMap,
   setMapView,
 } from "../../store/map/actions";
+import { selectMap } from "../../store/map/selectors";
 
 const initialCenter = [50.5962, 15.249];
 const initialZoom = 4;
@@ -24,6 +26,7 @@ function DisplayPosition({ map }) {
   const [center, setMapCenter] = useState(() => map.getCenter());
   const dispatch = useDispatch();
   const hikeId = useSelector(selectHikeId);
+  const myMap = useSelector(selectMap);
 
   const reset = useCallback(() => {
     map.setMinZoom(initialZoom);
@@ -96,12 +99,18 @@ function DisplayPosition({ map }) {
   }, [map]);
 
   return (
-    <p>
-      latitude: {center.lat.toFixed(4)}, longitude: {center.lng.toFixed(4)}{" "}
-      <button onClick={reset}>Reset</button>{" "}
-      <button onClick={setMap}>Set map</button>
-      <button onClick={saveRoute}>Save map</button>
-    </p>
+    <Group pt={10} pb={10}>
+      Latitude: {center.lat.toFixed(4)}, Longitude: {center.lng.toFixed(4)}{" "}
+      <Button size="xs" onClick={reset}>
+        Reset
+      </Button>{" "}
+      <Button size="xs" onClick={setMap}>
+        Set map
+      </Button>
+      <Button size="xs" onClick={saveRoute} disabled={!myMap.minZoom}>
+        Save map
+      </Button>
+    </Group>
   );
 }
 

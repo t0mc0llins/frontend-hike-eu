@@ -3,6 +3,7 @@ import { createStyles, Box, Text, Group } from "@mantine/core";
 import { ListSearch } from "tabler-icons-react";
 import { useSelector } from "react-redux";
 import { selectCurrentHike } from "../../store/hike/selectors";
+import { selectPage } from "../../store/appState/selectors";
 
 const LINK_HEIGHT = 38;
 const INDICATOR_SIZE = 10;
@@ -60,58 +61,60 @@ export function HikeContents() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(2);
   const hike = useSelector(selectCurrentHike);
+  const page = useSelector(selectPage);
+  if (hike.days) {
+    let links = [];
 
-  let links = [];
-
-  for (let i = 0; hike.days.length > i; i++) {
-    let currentDay = {
-      label: hike.days[i].title,
-      link: `#${hike.days[i].title}`,
-      order: 1,
-    };
-    links.push(currentDay);
-    for (let j = 0; hike.days[i].stages.length > j; j++) {
-      let currentStage = {
-        label: hike.days[i].stages[j].title,
-        link: `#${hike.days[i].stages[j].title}`,
-        order: 2,
+    for (let i = 0; hike.days.length > i; i++) {
+      let currentDay = {
+        label: hike.days[i].title,
+        link: `#${hike.days[i].title}`,
+        order: 1,
       };
-      links.push(currentStage);
+      links.push(currentDay);
+      for (let j = 0; hike.days[i].stages.length > j; j++) {
+        let currentStage = {
+          label: hike.days[i].stages[j].title,
+          link: `#${hike.days[i].stages[j].title}`,
+          order: 2,
+        };
+        links.push(currentStage);
+      }
     }
-  }
 
-  const items = links.map((item, index) => (
-    <Box
-      component="a"
-      href={item.link}
-      onClick={(event) => {
-        setActive(index);
-      }}
-      key={index}
-      className={cx(classes.link, { [classes.linkActive]: active === index })}
-      sx={(theme) => ({ paddingLeft: item.order * theme.spacing.lg })}
-    >
-      {item.label}
-    </Box>
-  ));
+    const items = links.map((item, index) => (
+      <Box
+        component="a"
+        href={item.link}
+        onClick={(event) => {
+          setActive(index);
+        }}
+        key={index}
+        className={cx(classes.link, { [classes.linkActive]: active === index })}
+        sx={(theme) => ({ paddingLeft: item.order * theme.spacing.lg })}
+      >
+        {item.label}
+      </Box>
+    ));
 
-  return (
-    <div>
-      <Group mb="md">
-        <ListSearch size={18} />
-        <Text>Table of contents</Text>
-      </Group>
-      <div className={classes.links}>
-        <div
-          className={classes.indicator}
-          style={{
-            transform: `translateY(${
-              active * LINK_HEIGHT + INDICATOR_OFFSET
-            }px)`,
-          }}
-        />
-        {items}
+    return (
+      <div style={{ display: page === "hike" ? "block" : "none" }}>
+        <Group mb="md">
+          <ListSearch size={18} />
+          <Text>Table of contents</Text>
+        </Group>
+        <div className={classes.links}>
+          <div
+            className={classes.indicator}
+            style={{
+              transform: `translateY(${
+                active * LINK_HEIGHT + INDICATOR_OFFSET
+              }px)`,
+            }}
+          />
+          {items}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

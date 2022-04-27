@@ -8,19 +8,23 @@ import {
   CheckboxGroup,
   RadioGroup,
   Radio,
+  Space,
+  Textarea,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { apiUrl } from "../../config/constants";
 import { countriesEmoji } from "../../config/countries-emoji";
 import { appDoneLoading, appLoading } from "../../store/appState/actions";
 import { setHikeDetails } from "../../store/form/actions";
+import { selectUser } from "../../store/user/selectors";
 
 export default function HikeForm(props) {
   const [hikeFormat, setHikeFormat] = useState("loop");
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const form = useForm({
     initialValues: {
@@ -50,7 +54,7 @@ export default function HikeForm(props) {
         startLocation: start,
         endLocation,
         coverImage: image,
-        userId: 1,
+        userId: user.id,
       });
       dispatch(
         setHikeDetails({
@@ -75,7 +79,7 @@ export default function HikeForm(props) {
   }
 
   return (
-    <Box sx={{ maxWidth: 300 }} mx="auto">
+    <Box sx={{ maxWidth: 300 }} mx="auto" pt={30}>
       <form onSubmit={form.onSubmit((values) => submitHike(values))}>
         <TextInput
           required
@@ -83,12 +87,14 @@ export default function HikeForm(props) {
           placeholder="my awesome hike"
           {...form.getInputProps("title", { withError: false })}
         />
-        <TextInput
+        <Space h="md" />
+        <Textarea
           required
           label="Description"
           placeholder="a short summary"
           {...form.getInputProps("description", { withError: false })}
         />
+        <Space h="md" />
         <Select
           label="Country"
           placeholder="Country"
@@ -97,6 +103,7 @@ export default function HikeForm(props) {
           searchable
           {...form.getInputProps("country", { withError: false })}
         />
+        <Space h="lg" />
         <CheckboxGroup
           spacing="md"
           label="Best season(s)"
@@ -112,6 +119,7 @@ export default function HikeForm(props) {
           <Checkbox value="2" label="Autumn" />
           <Checkbox value="3" label="Winter" />
         </CheckboxGroup>
+        <Space h="lg" />
         <RadioGroup
           value={hikeFormat}
           onChange={setHikeFormat}
@@ -123,12 +131,15 @@ export default function HikeForm(props) {
           <Radio value="loop" label="Loop" />
           <Radio value="point-to-point" label="Point-to-Point" />
         </RadioGroup>
+        <Space h="lg" />
         <TextInput
           placeholder="such and such trailhead"
           label="Start location"
           required
           {...form.getInputProps("start", { withError: false })}
         />
+        <Space h="md" />
+
         <TextInput
           placeholder="such and such trailhead"
           label="End location"
@@ -136,12 +147,15 @@ export default function HikeForm(props) {
           required={hikeFormat === "loop" ? false : true}
           {...form.getInputProps("end", { withError: false })}
         />
+        <Space h="md" />
+
         <TextInput
+          required
           placeholder="a scenic picture"
           label="Cover Image"
           {...form.getInputProps("image", { withError: false })}
         />
-        <Group position="right" mt="md">
+        <Group mt="md">
           <Button type="submit">Submit</Button>
         </Group>
       </form>
