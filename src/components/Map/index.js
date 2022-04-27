@@ -3,9 +3,8 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { useSelector } from "react-redux";
 import PolylineMeasurer from "../../config/polyline/PolylineMeasurer";
 import { selectCurrentMap } from "../../store/hike/selectors";
-import { polylines } from "./data";
 
-const Map = () => {
+const Map = (props) => {
   const map = useSelector(selectCurrentMap);
   const { center, minZoom, maxBoundSouthWest, maxBoundNorthEast } = map;
   return (
@@ -25,7 +24,7 @@ const Map = () => {
       <PolylineMeasurer
         position="topleft"
         clearMeasurementsOnStop={false}
-        seedData={polylines}
+        seedData={props.seedData}
         showClearControl={true}
       />
     </MapContainer>

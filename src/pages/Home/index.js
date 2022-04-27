@@ -13,6 +13,7 @@ import {
   selectDayFilter,
   selectSeasonFilter,
 } from "../../store/filter/selectors";
+import { setPage } from "../../store/appState/actions";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ export default function HomePage() {
   const filterCountries = useSelector(selectCountryFilter);
   const filterDays = useSelector(selectDayFilter);
   const filterSeasons = useSelector(selectSeasonFilter);
+
+  useEffect(() => {
+    dispatch(setPage("home"));
+  }, []);
 
   useEffect(() => {
     dispatch(fetchAllHikes);

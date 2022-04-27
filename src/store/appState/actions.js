@@ -4,6 +4,7 @@ export const APP_LOADING = "APP_LOADING";
 export const APP_DONE_LOADING = "APP_DONE_LOADING";
 export const increment_stepper = "increment_stepper";
 export const show_stage_form = "show_stage_form";
+export const set_page = "set_page";
 // export const SET_MESSAGE = "SET_MESSAGE";
 // export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
@@ -15,6 +16,7 @@ export const incrementStepper = (active) => {
 export const showStageForm = (bool) => {
   return { type: show_stage_form, payload: bool };
 };
+export const setPage = (page) => ({ type: set_page, payload: page });
 
 // export const clearMessage = () => ({ type: CLEAR_MESSAGE });
 

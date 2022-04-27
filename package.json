@@ -27,6 +27,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "tabler-icons-react": "^1.45.0",
+    "title-case": "^3.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

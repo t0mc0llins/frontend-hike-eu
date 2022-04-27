@@ -5,6 +5,7 @@ import {
   // CLEAR_MESSAGE,
   increment_stepper,
   show_stage_form,
+  set_page,
 } from "./actions";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   message: null,
   stepper: 4,
   stageForm: true,
+  page: "home",
 };
 
 export default function appStateSliceReducer(state = initialState, action) {
@@ -27,6 +29,9 @@ export default function appStateSliceReducer(state = initialState, action) {
 
     case show_stage_form:
       return { ...state, stageForm: action.payload };
+
+    case set_page:
+      return { ...state, page: action.payload };
 
     // case SET_MESSAGE:
     //   return { ...state, message: action.payload };

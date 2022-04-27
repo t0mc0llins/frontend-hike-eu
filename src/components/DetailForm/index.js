@@ -10,12 +10,6 @@ export default function DetailForm() {
   const dispatch = useDispatch();
   const submitable = useSelector(selectSubmitable);
 
-  // useEffect(() => {
-  //   !days || days.length === 0 || days[days.length - 1].stages.length === 0
-  //     ? setSubmitable(false)
-  //     : setSubmitable(true);
-  // }, [days]);
-
   return (
     <Box>
       {/* <Title>Hike info</Title> */}
