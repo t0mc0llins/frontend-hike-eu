@@ -11,6 +11,7 @@ import {
   createStyles,
   useMantineTheme,
 } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -49,9 +50,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function HikeCard({ image, title, description, country, badges }) {
+export function HikeCard({ image, title, description, country, badges, id }) {
   const { classes } = useStyles();
   const theme = useMantineTheme();
+  const navigate = useNavigate();
 
   const features = badges.map((badge) => (
     <Badge
@@ -91,7 +93,13 @@ export function HikeCard({ image, title, description, country, badges }) {
       </Card.Section>
 
       <Group mt="xs">
-        <Button radius="md" style={{ flex: 1 }}>
+        <Button
+          radius="md"
+          onClick={() => {
+            navigate(`/hike/${id}`);
+          }}
+          style={{ flex: 1 }}
+        >
           Show details
         </Button>
         <ActionIcon variant="default" radius="md" size={36}>

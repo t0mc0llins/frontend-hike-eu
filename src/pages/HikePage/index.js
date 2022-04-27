@@ -1,12 +1,4 @@
-import {
-  Anchor,
-  Container,
-  Image,
-  Paper,
-  Space,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Container, Image, Paper, Space, Text, Title } from "@mantine/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -21,7 +13,6 @@ import {
   selectCurrentHike,
   selectCurrentMap,
 } from "../../store/hike/selectors";
-import { useScrollIntoView } from "@mantine/hooks";
 
 const findDistance = (hike) => {
   let total = 0;
@@ -58,7 +49,6 @@ export default function HikePage() {
   const dispatch = useDispatch();
   const hike = useSelector(selectCurrentHike);
   const loading = useSelector(selectAppLoading);
-  const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView();
 
   useEffect(() => {
     dispatch(setPage("hike"));
@@ -76,14 +66,15 @@ export default function HikePage() {
       <Paper
         p={30}
         ml={70}
-        mt={60}
+        mt={30}
         style={{ width: "80%" }}
         className="textinfo-container"
-        ref={scrollableRef}
       >
         <Container fluid>
           <Container>
-            <Title order={3}>{hike.title}</Title>
+            <Title id={hike.title} order={2}>
+              {hike.title}
+            </Title>
             <Space h="sm" />
             <Text>
               {hike.startLocation},{" "}
@@ -116,15 +107,15 @@ export default function HikePage() {
             {hike.days.map((d) => {
               return (
                 <div key={d.id} id={d.title}>
-                  <Anchor href={`#${d.title}`}>{d.title}</Anchor>
+                  <Title order={3}>{d.title}</Title>
                   <Space h="sm" />
                   <Text>{d.description}</Text>
                   <Space h="md" />
                   <Container>
                     {d.stages.map((s) => {
                       return (
-                        <div key={s.id}>
-                          <Text>{s.title}</Text>
+                        <div key={s.id} id={s.title}>
+                          <Title order={4}>{s.title}</Title>
                           <Space h="sm" />
                           <Text>{s.description}</Text>
                           <Space h="sm" />
@@ -144,7 +135,7 @@ export default function HikePage() {
           </Container>
         </Container>
       </Paper>
-      <Container style={{ height: 800, width: "100%" }}>
+      <Container id="map" style={{ height: 800, width: "100%" }}>
         {!map ? "Loading" : <Map seedData={map.polylineArr} />}
       </Container>
     </Container>

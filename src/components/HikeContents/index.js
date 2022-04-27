@@ -63,8 +63,7 @@ export function HikeContents() {
   const hike = useSelector(selectCurrentHike);
   const page = useSelector(selectPage);
   if (hike.days) {
-    let links = [];
-
+    let links = [{ label: hike.title, link: `#${hike.title}`, order: 1 }];
     for (let i = 0; hike.days.length > i; i++) {
       let currentDay = {
         label: hike.days[i].title,
@@ -81,6 +80,7 @@ export function HikeContents() {
         links.push(currentStage);
       }
     }
+    links.push({ label: "Route map", link: "#map", order: 1 });
 
     const items = links.map((item, index) => (
       <Box
@@ -98,7 +98,13 @@ export function HikeContents() {
     ));
 
     return (
-      <div style={{ display: page === "hike" ? "block" : "none" }}>
+      <div
+        style={{
+          display: page === "hike" ? "block" : "none",
+          padding: 10,
+          marginTop: 100,
+        }}
+      >
         <Group mb="md">
           <ListSearch size={18} />
           <Text>Table of contents</Text>

@@ -19,10 +19,3 @@ export default function NavBar() {
     </Navbar>
   );
 }
-
-//   } else if (page === "hike") {
-//     <Navbar p="xs" width={{ base: 0 }} height={"100%"} style={{ zIndex: 0 }}>
-//       <HikeContents />
-//     </Navbar>;
-//   }
-// }

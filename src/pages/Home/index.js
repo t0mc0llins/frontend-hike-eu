@@ -88,6 +88,7 @@ export default function HomePage() {
               return (
                 <Grid.Col key={id} sm={6} md={4} lg={3} xl={2}>
                   <HikeCard
+                    id={id}
                     title={title}
                     image={coverImage ? coverImage : noImage}
                     description={summaryDescription}
