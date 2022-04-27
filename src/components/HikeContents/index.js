@@ -66,14 +66,14 @@ export function HikeContents() {
   for (let i = 0; hike.days.length > i; i++) {
     let currentDay = {
       label: hike.days[i].title,
-      link: hike.days[i].title,
+      link: `#${hike.days[i].title}`,
       order: 1,
     };
     links.push(currentDay);
     for (let j = 0; hike.days[i].stages.length > j; j++) {
       let currentStage = {
         label: hike.days[i].stages[j].title,
-        link: hike.days[i].stages[j].title,
+        link: `#${hike.days[i].stages[j].title}`,
         order: 2,
       };
       links.push(currentStage);
@@ -85,7 +85,6 @@ export function HikeContents() {
       component="a"
       href={item.link}
       onClick={(event) => {
-        event.preventDefault();
         setActive(index);
       }}
       key={index}

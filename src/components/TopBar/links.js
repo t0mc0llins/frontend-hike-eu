@@ -4,7 +4,7 @@ export const links = [
     label: "My Hikes",
   },
   {
-    link: "/create",
+    link: "/hike/create",
     label: "Create Hike",
   },
   {

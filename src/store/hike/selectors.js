@@ -11,3 +11,29 @@ export const selectSearchableHikes = (reduxState) =>
 export const selectCurrentHike = (reduxState) => reduxState.hike.selectedHike;
 export const selectCurrentMap = (reduxState) =>
   reduxState.hike.selectedHike.map;
+export const selectTotalDistance = (reduxState) => {
+  let total = 0;
+  for (let i = 0; reduxState.hike.selectedHike.days.length > i; i++) {
+    for (
+      let j = 0;
+      reduxState.hike.selectedHike.days[i].stages.length > j;
+      j++
+    ) {
+      total += reduxState.hike.selectedHike.days[i].stages[j].distance;
+    }
+  }
+  return total;
+};
+export const selectTotalElevation = (reduxState) => {
+  let total = 0;
+  for (let i = 0; reduxState.hike.selectedHike.days.length > i; i++) {
+    for (
+      let j = 0;
+      reduxState.hike.selectedHike.days[i].stages.length > j;
+      j++
+    ) {
+      total += reduxState.hike.selectedHike.days[i].stages[j].elevation;
+    }
+  }
+  return total;
+};

@@ -2,7 +2,6 @@ import { all_hikes_fetched, fetch_hike } from "./types";
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { appDoneLoading, appLoading } from "../appState/actions";
-import { selectCurrentHike } from "./selectors";
 
 function allHikesFetched(hikes) {
   return {

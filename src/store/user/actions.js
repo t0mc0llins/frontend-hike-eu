@@ -21,15 +21,15 @@ const tokenStillValid = (userWithoutToken) => ({
 
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (name, email, password, isArtist) => {
+export const signUp = (values) => {
   return async (dispatch, getState) => {
+    const { name, email, password } = values;
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/auth/signup`, {
         name,
         email,
         password,
-        isArtist,
       });
 
       dispatch(loginSuccess(response.data));
@@ -48,8 +48,9 @@ export const signUp = (name, email, password, isArtist) => {
   };
 };
 
-export const login = (email, password) => {
+export const login = (values) => {
   return async (dispatch, getState) => {
+    const { email, password } = values;
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/auth/login`, {

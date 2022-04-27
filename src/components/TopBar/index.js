@@ -1,31 +1,13 @@
 import React, { forwardRef, useState } from "react";
-import {
-  createStyles,
-  Header,
-  Autocomplete,
-  Group,
-  Avatar,
-  UnstyledButton,
-  Text,
-  Menu,
-  Divider,
-} from "@mantine/core";
-import {
-  Logout,
-  Heart,
-  Star,
-  Message,
-  Settings,
-  PlayerPause,
-  Trash,
-  SwitchHorizontal,
-  ChevronDown,
-  Search,
-} from "tabler-icons-react";
+import { createStyles, Header, Autocomplete, Group, Text } from "@mantine/core";
+import { Search } from "tabler-icons-react";
 import { ReactComponent as Logo } from "../../images/logo-hike.svg";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/user/selectors";
 import { selectSearchableHikes } from "../../store/hike/selectors";
+import { selectToken } from "../../store/user/selectors";
+import LoggedIn from "../LoggedIn";
+import LoggedOut from "../LoggedOut";
+import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -98,19 +80,14 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function TopBar({ links }) {
-  const { classes, theme, cx } = useStyles();
-  const [userMenuOpened, setUserMenuOpened] = useState(false);
-  const user = useSelector(selectUser);
+  const { classes } = useStyles();
   const searchData = useSelector(selectSearchableHikes);
   const [search, setSearch] = useState("");
+  const token = useSelector(selectToken);
+  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
+    <a key={link.label} href={link.link} className={classes.link}>
       {link.label}
     </a>
   ));
@@ -132,7 +109,9 @@ export function TopBar({ links }) {
     <Header className={classes.header}>
       <div className={classes.inner}>
         <Group>
-          <Logo style={{ width: 80, height: 57 }} />
+          <Link to={"/"}>
+            <Logo style={{ width: 80, height: 57 }} />
+          </Link>
         </Group>
         <Group>
           <Autocomplete
@@ -153,65 +132,7 @@ export function TopBar({ links }) {
           <Group ml={50} spacing={5} className={classes.links}>
             {items}
           </Group>
-          <Menu
-            size={260}
-            placement="end"
-            transition="pop-top-right"
-            className={classes.userMenu}
-            onClose={() => setUserMenuOpened(false)}
-            onOpen={() => setUserMenuOpened(true)}
-            control={
-              <UnstyledButton
-                className={cx(classes.user, {
-                  [classes.userActive]: userMenuOpened,
-                })}
-              >
-                <Group spacing={7}>
-                  <Avatar
-                    src={user.image}
-                    alt={user.name}
-                    radius="xl"
-                    size={20}
-                  />
-                  <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {user.name}
-                  </Text>
-                  <ChevronDown size={12} />
-                </Group>
-              </UnstyledButton>
-            }
-          >
-            <Menu.Item icon={<Heart size={14} color={theme.colors.red[6]} />}>
-              Liked posts
-            </Menu.Item>
-            <Menu.Item icon={<Star size={14} color={theme.colors.yellow[6]} />}>
-              Saved posts
-            </Menu.Item>
-            <Menu.Item
-              icon={<Message size={14} color={theme.colors.blue[6]} />}
-            >
-              Your comments
-            </Menu.Item>
-
-            <Menu.Label>Settings</Menu.Label>
-            <Menu.Item icon={<Settings size={14} />}>
-              Account settings
-            </Menu.Item>
-            <Menu.Item icon={<SwitchHorizontal size={14} />}>
-              Change account
-            </Menu.Item>
-            <Menu.Item icon={<Logout size={14} />}>Logout</Menu.Item>
-
-            <Divider />
-
-            <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item icon={<PlayerPause size={14} />}>
-              Pause subscription
-            </Menu.Item>
-            <Menu.Item color="red" icon={<Trash size={14} />}>
-              Delete account
-            </Menu.Item>
-          </Menu>
+          {loginLogoutControls}
         </Group>
       </div>
     </Header>
