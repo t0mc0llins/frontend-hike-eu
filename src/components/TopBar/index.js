@@ -10,6 +10,7 @@ import LoggedOut from "../LoggedOut";
 import { Link, useNavigate } from "react-router-dom";
 import { selectPage } from "../../store/appState/selectors";
 import { setSearchFilter } from "../../store/filter/actions";
+import { DarkMode } from "../DarkMode";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -142,6 +143,7 @@ export function TopBar({ links }) {
             {items}
           </Group>
           {loginLogoutControls}
+          <DarkMode />
         </Group>
       </div>
     </Header>
