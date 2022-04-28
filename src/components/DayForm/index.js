@@ -77,7 +77,10 @@ export default function DayForm() {
               );
             })
           ) : (
-            <Text>This day doesn't have any stages yet</Text>
+            <Text>
+              This day doesn't have any stages yet. At least one must be added
+              to submit the hike.
+            </Text>
           )}
           {stageForm ? (
             <StageForm />

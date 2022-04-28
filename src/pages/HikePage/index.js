@@ -136,7 +136,7 @@ export default function HikePage() {
         </Container>
       </Paper>
       <Container id="map" style={{ height: 800, width: "100%" }}>
-        {!map ? "Loading" : <Map seedData={map.polylineArr} />}
+        {!map ? "Loading" : <Map seedData={JSON.parse(map.polylineArr)} />}
       </Container>
     </Container>
   );

@@ -7,7 +7,7 @@ import { selectSearchableHikes } from "../../store/hike/selectors";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "../LoggedIn";
 import LoggedOut from "../LoggedOut";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { selectPage } from "../../store/appState/selectors";
 import { setSearchFilter } from "../../store/filter/actions";
 import { DarkMode } from "../DarkMode";

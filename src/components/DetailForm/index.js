@@ -1,5 +1,6 @@
 import { Button, Center, Container, Text, Title } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { saveForm } from "../../store/form/actions";
 import { selectDays, selectSubmitable } from "../../store/form/selectors";
 import DayForm from "../DayForm";
@@ -8,6 +9,7 @@ export default function DetailForm() {
   const days = useSelector(selectDays);
   const dispatch = useDispatch();
   const submitable = useSelector(selectSubmitable);
+  const navigate = useNavigate();
 
   return (
     <Container pt={20}>
@@ -24,7 +26,7 @@ export default function DetailForm() {
           );
         })
       ) : (
-        <Text>No days added yet</Text>
+        <Text>No days added yet. You must add at leat one.</Text>
       )}
       <DayForm />
       <Center key={days}>
@@ -32,6 +34,7 @@ export default function DetailForm() {
           disabled={submitable}
           onClick={() => {
             dispatch(saveForm());
+            navigate("/");
           }}
         >
           Submit hike
