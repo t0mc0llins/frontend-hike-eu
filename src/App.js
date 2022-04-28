@@ -24,6 +24,11 @@ function App() {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
 
+  useEffect(() => {
+    const dark = localStorage.getItem("darkMode");
+    dark ? setColorScheme("dark") : setColorScheme("light");
+  }, []);
+
   const links = token ? loggedInLinks : loggedOutLinks;
 
   return (

@@ -1,4 +1,4 @@
-import { Box, Navbar, Title } from "@mantine/core";
+import { Box, Navbar, Space, Title } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { selectPage } from "../../store/appState/selectors";
 import CountrySelect from "../CountrySelect";
@@ -12,19 +12,22 @@ export default function FilterPane() {
     <div style={{ display: page === "home" ? "block" : "none" }}>
       <Navbar.Section>
         <Box pb={30} pt={30} pl={10} pr={10} mt={50}>
-          <Title order={4}>Country</Title>
+          <Title order={5}>Country</Title>
+          <Space h="md" />
           <CountrySelect />
         </Box>
       </Navbar.Section>
       <Navbar.Section>
         <Box pb={30} pl={10} pr={10}>
-          <Title order={4}>Seasons</Title>
+          <Title order={5}>Seasons</Title>
+          <Space h="md" />
           <SeasonSelect />
         </Box>
       </Navbar.Section>
       <Navbar.Section>
         <Box pb={20} pl={10} pr={10}>
-          <Title order={4}>Duration</Title>
+          <Title order={5}>Duration</Title>
+          <Space h="md" />
           <DaySelect />
         </Box>
       </Navbar.Section>

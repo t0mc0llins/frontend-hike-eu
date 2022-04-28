@@ -15,7 +15,7 @@ export default function CountrySelect() {
   return (
     <MultiSelect
       data={countriesEmoji}
-      placeholder="Where would you like to go?"
+      placeholder="Where to?"
       searchable
       clearable
       nothingFound="Nothing found"

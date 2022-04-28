@@ -81,14 +81,21 @@ export default function HikePage() {
               {countries.find((c) => c.value === hike.countryRef).label}
             </Text>
             <Space h="sm" />
-            <Text>Total distance: {findDistance(hike)} km</Text>
-            <Space h="sm" />
-            <Text>Total elevation gain: {findElevation(hike)} m</Text>
-            <Space h="sm" />
-            <Text>Total estimated hiking time: {findDuration(hike)} hours</Text>
+            <Text>
+              <strong>Total distance</strong>: {findDistance(hike)} km
+            </Text>
             <Space h="sm" />
             <Text>
-              Recommended seasons:{" "}
+              <strong>Total elevation gain</strong>: {findElevation(hike)} m
+            </Text>
+            <Space h="sm" />
+            <Text>
+              <strong>Total estimated hiking time</strong>: {findDuration(hike)}{" "}
+              hours
+            </Text>
+            <Space h="sm" />
+            <Text>
+              <strong>Recommended seasons</strong>:{" "}
               {hike.seasonRefs.map((s) => {
                 const season = seasons.find((d) => d.id === s);
                 return `${titleCase(season.label.toLowerCase())}  `;

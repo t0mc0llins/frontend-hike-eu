@@ -1,4 +1,5 @@
 import {
+  ActionIcon,
   Box,
   Button,
   Group,
@@ -15,6 +16,7 @@ import { selectShowStageForm } from "../../store/appState/selectors";
 import { submitDay } from "../../store/form/actions";
 import StageForm from "../StageForm";
 import { selectDays } from "../../store/form/selectors";
+import { Trash } from "tabler-icons-react";
 
 export default function DayForm() {
   const dispatch = useDispatch();
@@ -71,15 +73,20 @@ export default function DayForm() {
           days[days.length - 1].stages.length !== 0 ? (
             days[days.length - 1].stages.map((s) => {
               return (
-                <Text key={s.stageOrder}>
-                  Stage {s.stageOrder}: {s.title}
-                </Text>
+                <Group>
+                  <Text key={s.stageOrder}>
+                    <strong>Stage {s.stageOrder}</strong> - {s.title}
+                  </Text>
+                  <ActionIcon color="red" variant="hover" onClick={() => {}}>
+                    <Trash size={16} />
+                  </ActionIcon>{" "}
+                </Group>
               );
             })
           ) : (
             <Text color="red">
-              This day doesn't have any stages yet. At least one must be added
-              to submit the hike.
+              This day doesn't have any stages yet. Add at least one to submit
+              the hike.
             </Text>
           )}
           {stageForm ? (
