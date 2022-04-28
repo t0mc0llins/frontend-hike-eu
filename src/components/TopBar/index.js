@@ -122,7 +122,7 @@ export function TopBar({ links }) {
       <div className={classes.inner}>
         <Group>
           <Link to={"/"}>
-            {darkMode ? (
+            {!darkMode ? (
               <LogoDark style={{ width: 80, height: 57 }} />
             ) : (
               <LogoLight style={{ width: 80, height: 57 }} />

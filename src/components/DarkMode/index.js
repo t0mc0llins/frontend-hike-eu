@@ -6,9 +6,8 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { Sun, MoonStars } from "tabler-icons-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "../../store/appState/actions";
-import { selectDarkMode } from "../../store/appState/selectors";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -39,13 +38,12 @@ const useStyles = createStyles((theme) => ({
 export function DarkMode() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const { classes, cx } = useStyles();
-  const dispatch = useDispatch();
-  const darkMode = useSelector(selectDarkMode);
 
   const toggleTheme = () => {
-    dispatch(toggleDarkMode());
     toggleColorScheme();
-    localStorage.setItem("darkMode", darkMode);
+    localStorage.getItem("darkMode") === "true"
+      ? localStorage.setItem("darkMode", "false")
+      : localStorage.setItem("darkMode", "true");
   };
 
   return (

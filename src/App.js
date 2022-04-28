@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const dark = localStorage.getItem("darkMode");
-    dark ? setColorScheme("dark") : setColorScheme("light");
+    dark === "true" ? setColorScheme("dark") : setColorScheme("light");
   }, []);
 
   const links = token ? loggedInLinks : loggedOutLinks;
