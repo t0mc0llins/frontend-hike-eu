@@ -6,6 +6,7 @@ import {
   increment_stepper,
   show_stage_form,
   set_page,
+  toggle_dark_mode,
 } from "./actions";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   stepper: 4,
   stageForm: true,
   page: "home",
+  darkMode: "false",
 };
 
 export default function appStateSliceReducer(state = initialState, action) {
@@ -32,6 +34,9 @@ export default function appStateSliceReducer(state = initialState, action) {
 
     case set_page:
       return { ...state, page: action.payload };
+
+    case toggle_dark_mode:
+      return { ...state, darkMode: !state.darkMode };
 
     // case SET_MESSAGE:
     //   return { ...state, message: action.payload };

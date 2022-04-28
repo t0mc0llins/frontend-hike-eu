@@ -1,14 +1,16 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import { createStyles, Header, Autocomplete, Group, Text } from "@mantine/core";
 import { Search } from "tabler-icons-react";
-import { ReactComponent as Logo } from "../../images/logo-hike.svg";
+import { ReactComponent as LogoLight } from "../../images/logo-light.svg";
+import { ReactComponent as LogoDark } from "../../images/logo-dark.svg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { selectSearchableHikes } from "../../store/hike/selectors";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "../LoggedIn";
 import LoggedOut from "../LoggedOut";
 import { Link } from "react-router-dom";
-import { selectPage } from "../../store/appState/selectors";
+import { selectDarkMode, selectPage } from "../../store/appState/selectors";
 import { setSearchFilter } from "../../store/filter/actions";
 import { DarkMode } from "../DarkMode";
 
@@ -90,6 +92,7 @@ export function TopBar({ links }) {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
   const page = useSelector(selectPage);
   const dispatch = useDispatch();
+  const darkMode = useSelector(selectDarkMode);
 
   useEffect(() => {
     dispatch(setSearchFilter(search));
@@ -119,7 +122,11 @@ export function TopBar({ links }) {
       <div className={classes.inner}>
         <Group>
           <Link to={"/"}>
-            <Logo style={{ width: 80, height: 57 }} />
+            {!darkMode ? (
+              <LogoDark style={{ width: 80, height: 57 }} />
+            ) : (
+              <LogoLight style={{ width: 80, height: 57 }} />
+            )}
           </Link>
         </Group>
         <Group>

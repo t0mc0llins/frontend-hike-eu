@@ -99,17 +99,21 @@ function DisplayPosition({ map }) {
   }, [map]);
 
   return (
-    <Group pt={10} pb={10}>
-      Latitude: {center.lat.toFixed(4)}, Longitude: {center.lng.toFixed(4)}{" "}
-      <Button size="xs" onClick={reset}>
-        Reset
-      </Button>{" "}
-      <Button size="xs" onClick={setMap}>
-        Set map
-      </Button>
-      <Button size="xs" onClick={saveRoute} disabled={!myMap.minZoom}>
-        Save map
-      </Button>
+    <Group pt={10} pb={10} spacing={50}>
+      <Group>
+        Latitude: {center.lat.toFixed(4)}, Longitude: {center.lng.toFixed(4)}{" "}
+        <Button color="red" size="xs" onClick={reset}>
+          Reset
+        </Button>{" "}
+      </Group>
+      <Group position="right" spacing="sm">
+        <Button size="xs" onClick={setMap}>
+          Set map
+        </Button>
+        <Button size="xs" onClick={saveRoute} disabled={!myMap.minZoom}>
+          Save map
+        </Button>
+      </Group>
     </Group>
   );
 }

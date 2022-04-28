@@ -1,30 +1,30 @@
-import {
-  AppShell,
-  MantineProvider,
-  ColorSchemeProvider,
-  ColorScheme,
-} from "@mantine/core";
+import { AppShell, MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { TopBar } from "./components/TopBar";
-import { links } from "./components/TopBar/links";
 import HikePage from "./pages/HikePage";
 import HomePage from "./pages/Home";
 import { getUserWithStoredToken } from "./store/user/actions";
 import "./App.css";
 import CreatePage from "./pages/CreatePage";
+import { loggedInLinks } from "./components/TopBar/loggedInLinks";
+import { selectToken } from "./store/user/selectors";
+import { loggedOutLinks } from "./components/TopBar/loggedOutLinks";
 
 function App() {
   const dispatch = useDispatch();
   const [colorScheme, setColorScheme] = useState("light");
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
+
+  const links = token ? loggedInLinks : loggedOutLinks;
 
   return (
     <ColorSchemeProvider

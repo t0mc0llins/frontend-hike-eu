@@ -1,4 +1,4 @@
-export const links = [
+export const loggedInLinks = [
   {
     link: "/mytrips",
     label: "My Hikes",

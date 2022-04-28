@@ -26,11 +26,12 @@ export default function DetailForm() {
           );
         })
       ) : (
-        <Text>No days added yet. You must add at leat one.</Text>
+        <Text color="red">No days added yet. You must add at leat one.</Text>
       )}
       <DayForm />
       <Center key={days}>
         <Button
+          mt={20}
           disabled={submitable}
           onClick={() => {
             dispatch(saveForm());
