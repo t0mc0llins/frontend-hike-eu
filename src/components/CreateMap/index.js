@@ -126,7 +126,7 @@ export default function CreateMap() {
         scrollWheelZoom={true}
         maxBounds={initialBounds}
         ref={setMap}
-        style={{ height: 800, width: "100%" }}
+        style={{ height: 500, width: "100%" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

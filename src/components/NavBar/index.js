@@ -10,7 +10,7 @@ export default function NavBar() {
   return (
     <Navbar
       p="xs"
-      width={{ base: page === "hike" ? 350 : 270 }}
+      width={{ base: page === "hike" ? 330 : 270 }}
       height={"100%"}
       style={{ zIndex: 0 }}
     >

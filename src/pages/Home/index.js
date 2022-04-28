@@ -11,6 +11,7 @@ import { countries } from "../../config/countries";
 import {
   selectCountryFilter,
   selectDayFilter,
+  selectSearchFilter,
   selectSeasonFilter,
 } from "../../store/filter/selectors";
 import { setPage } from "../../store/appState/actions";
@@ -22,6 +23,7 @@ export default function HomePage() {
   const filterCountries = useSelector(selectCountryFilter);
   const filterDays = useSelector(selectDayFilter);
   const filterSeasons = useSelector(selectSeasonFilter);
+  const filterSearch = useSelector(selectSearchFilter);
 
   useEffect(() => {
     dispatch(setPage("home"));
@@ -57,6 +59,16 @@ export default function HomePage() {
       }
     }
     return present;
+  });
+
+  filteredHikes = filteredHikes.filter((h) => {
+    const country = countries.find((country) => {
+      return h.countryRef === country.value;
+    });
+    return (
+      h.title.toLowerCase().includes(filterSearch.toLowerCase().trim()) ||
+      country.label.toLowerCase().includes(filterSearch.toLowerCase().trim())
+    );
   });
 
   return (

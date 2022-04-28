@@ -1,6 +1,7 @@
 import {
   set_country_filters,
   set_day_filters,
+  set_search_filter,
   set_season_filters,
 } from "./types";
 
@@ -22,5 +23,12 @@ export function setDayFilters(filterDays) {
   return {
     type: set_day_filters,
     payload: filterDays,
+  };
+}
+
+export function setSearchFilter(search) {
+  return {
+    type: set_search_filter,
+    payload: search,
   };
 }

@@ -1,13 +1,15 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { createStyles, Header, Autocomplete, Group, Text } from "@mantine/core";
 import { Search } from "tabler-icons-react";
 import { ReactComponent as Logo } from "../../images/logo-hike.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectSearchableHikes } from "../../store/hike/selectors";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "../LoggedIn";
 import LoggedOut from "../LoggedOut";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { selectPage } from "../../store/appState/selectors";
+import { setSearchFilter } from "../../store/filter/actions";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -85,6 +87,12 @@ export function TopBar({ links }) {
   const [search, setSearch] = useState("");
   const token = useSelector(selectToken);
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const page = useSelector(selectPage);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSearchFilter(search));
+  }, [search, dispatch]);
 
   const items = links.map((link) => (
     <a key={link.label} href={link.link} className={classes.link}>
@@ -92,8 +100,8 @@ export function TopBar({ links }) {
     </a>
   ));
 
-  const AutoCompleteItem = forwardRef(({ value, country }, ref) => (
-    <div ref={ref}>
+  const AutoCompleteItem = forwardRef(({ value, country, ...others }, ref) => (
+    <div ref={ref} {...others}>
       <Group noWrap>
         <div>
           <Text>{value}</Text>
@@ -115,6 +123,7 @@ export function TopBar({ links }) {
         </Group>
         <Group>
           <Autocomplete
+            style={{ display: page === "home" ? "block" : "none" }}
             className={classes.search}
             placeholder="Search"
             value={search}

@@ -151,7 +151,7 @@ export default function HikeForm(props) {
 
         <TextInput
           required
-          placeholder="a scenic picture"
+          placeholder="www.imagehost.com/mytrip.jpeg"
           label="Cover Image"
           {...form.getInputProps("image", { withError: false })}
         />

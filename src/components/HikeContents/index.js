@@ -102,7 +102,8 @@ export function HikeContents() {
         style={{
           display: page === "hike" ? "block" : "none",
           padding: 10,
-          marginTop: 100,
+          marginTop: 50,
+          overflowY: "scroll",
         }}
       >
         <Group mb="md">

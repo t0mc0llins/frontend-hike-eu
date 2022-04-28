@@ -1,6 +1,7 @@
 import {
   set_country_filters,
   set_day_filters,
+  set_search_filter,
   set_season_filters,
 } from "./types";
 
@@ -8,6 +9,7 @@ const initialState = {
   countries: [],
   seasons: ["0", "1", "2", "3"],
   days: "3",
+  search: "",
 };
 
 export default function filterSliceReducer(state = initialState, action) {
@@ -28,6 +30,12 @@ export default function filterSliceReducer(state = initialState, action) {
       return {
         ...state,
         days: action.payload,
+      };
+    }
+    case set_search_filter: {
+      return {
+        ...state,
+        search: action.payload,
       };
     }
 
