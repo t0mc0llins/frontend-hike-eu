@@ -100,8 +100,6 @@ export function saveForm() {
 
 export function submitHike(values, nextStep) {
   return async function thunk(dispatch, getState) {
-    console.log(values);
-
     const { title, description, country, seasons, start, end, image } = values;
     try {
       dispatch(appLoading());
