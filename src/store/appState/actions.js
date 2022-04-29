@@ -5,7 +5,7 @@ export const APP_DONE_LOADING = "APP_DONE_LOADING";
 export const increment_stepper = "increment_stepper";
 export const show_stage_form = "show_stage_form";
 export const set_page = "set_page";
-export const toggle_dark_mode = "toggle_dark_mode";
+export const set_dark_mode = "set_dark_mode";
 // export const SET_MESSAGE = "SET_MESSAGE";
 // export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
@@ -19,7 +19,10 @@ export const showStageForm = (bool) => {
 };
 export const setPage = (page) => ({ type: set_page, payload: page });
 
-export const toggleDarkMode = () => ({ type: toggle_dark_mode });
+export const setDarkMode = (mode) => ({
+  type: set_dark_mode,
+  payload: mode,
+});
 
 // export const clearMessage = () => ({ type: CLEAR_MESSAGE });
 

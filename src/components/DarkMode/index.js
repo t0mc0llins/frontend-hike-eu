@@ -7,7 +7,7 @@ import {
 } from "@mantine/core";
 import { Sun, MoonStars } from "tabler-icons-react";
 import { useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../store/appState/actions";
+import { setDarkMode } from "../../store/appState/actions";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -38,12 +38,18 @@ const useStyles = createStyles((theme) => ({
 export function DarkMode() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const { classes, cx } = useStyles();
+  const dispatch = useDispatch();
 
   const toggleTheme = () => {
-    toggleColorScheme();
-    localStorage.getItem("darkMode") === "true"
-      ? localStorage.setItem("darkMode", "false")
-      : localStorage.setItem("darkMode", "true");
+    if (colorScheme === "dark") {
+      toggleColorScheme();
+      dispatch(setDarkMode("light"));
+      localStorage.setItem("darkMode", "light");
+    } else {
+      toggleColorScheme();
+      dispatch(setDarkMode("dark"));
+      localStorage.setItem("darkMode", "dark");
+    }
   };
 
   return (
@@ -51,11 +57,7 @@ export function DarkMode() {
       <div className={classes.root}>
         <Sun className={cx(classes.icon, classes.iconLight)} size={18} />
         <MoonStars className={cx(classes.icon, classes.iconDark)} size={18} />
-        <Switch
-          checked={colorScheme === "dark"}
-          onChange={() => toggleTheme()}
-          size="md"
-        />
+        <Switch onChange={() => toggleTheme()} size="md" />
       </div>
     </Group>
   );

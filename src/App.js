@@ -12,6 +12,7 @@ import CreatePage from "./pages/CreatePage";
 import { loggedInLinks } from "./components/TopBar/loggedInLinks";
 import { selectToken } from "./store/user/selectors";
 import { loggedOutLinks } from "./components/TopBar/loggedOutLinks";
+import { setDarkMode } from "./store/appState/actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,18 @@ function App() {
 
   useEffect(() => {
     const dark = localStorage.getItem("darkMode");
-    dark === "true" ? setColorScheme("dark") : setColorScheme("light");
+    if (!dark) {
+      localStorage.setItem("darkMode", "light");
+      dispatch(setDarkMode("light"));
+      setColorScheme("light");
+    }
+    if (dark === "dark") {
+      setColorScheme("dark");
+      dispatch(setDarkMode("dark"));
+    } else {
+      setColorScheme("light");
+      dispatch(setDarkMode("light"));
+    }
   }, []);
 
   const links = token ? loggedInLinks : loggedOutLinks;
