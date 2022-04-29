@@ -1,4 +1,12 @@
-import { Container, Image, Paper, Space, Text, Title } from "@mantine/core";
+import {
+  Container,
+  Divider,
+  Image,
+  Paper,
+  Space,
+  Text,
+  Title,
+} from "@mantine/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -114,6 +122,9 @@ export default function HikePage() {
             {hike.days.map((d) => {
               return (
                 <div key={d.id} id={d.title}>
+                  <Space h="md" />
+                  <Divider size="sm" />
+                  <Space h="md" />
                   <Title order={3}>{d.title}</Title>
                   <Space h="sm" />
                   <Text>{d.description}</Text>
@@ -122,6 +133,9 @@ export default function HikePage() {
                     {d.stages.map((s) => {
                       return (
                         <div key={s.id} id={s.title}>
+                          <Space h="sm" />
+                          <Divider size="xs" />
+                          <Space h="sm" />
                           <Title order={4}>{s.title}</Title>
                           <Space h="sm" />
                           <Text>{s.description}</Text>
@@ -131,7 +145,6 @@ export default function HikePage() {
                           <Text>Estimated hiking time: {s.duration}</Text>
                           <Space h="sm" />
                           <Text>Elevation gain: {s.elevation}</Text>
-                          <Space h="sm" />
                         </div>
                       );
                     })}
