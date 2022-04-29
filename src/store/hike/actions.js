@@ -1,7 +1,10 @@
-import { all_hikes_fetched, fetch_hike } from "./types";
+import { all_hikes_fetched, fetch_hike, set_hike_format } from "./types";
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { appDoneLoading, appLoading } from "../appState/actions";
+import { setHikeDetails } from "../form/actions";
+import { selectHikeFormat } from "./selectors";
+import { selectToken, selectUser } from "../user/selectors";
 
 function allHikesFetched(hikes) {
   return {
@@ -14,6 +17,13 @@ function fetchHike(hike) {
   return {
     type: fetch_hike,
     payload: hike,
+  };
+}
+
+export function setHikeFormatAction(format) {
+  return {
+    type: set_hike_format,
+    payload: format,
   };
 }
 

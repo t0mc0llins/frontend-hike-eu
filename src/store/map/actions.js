@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { appDoneLoading, appLoading } from "../appState/actions";
+import { selectToken } from "../user/selectors";
 import { selectMap } from "./selectors";
 
 const {
@@ -55,14 +56,23 @@ export function saveMap(hikeId) {
     } = map;
     dispatch(appLoading());
     try {
-      await axios.post(`${apiUrl}/hikes/create/map`, {
-        minZoom,
-        maxBoundSouthWest,
-        maxBoundNorthEast,
-        center,
-        polylineArr,
-        hikeId,
-      });
+      const token = selectToken(getState());
+      await axios.post(
+        `${apiUrl}/hikes/create/map`,
+        {
+          minZoom,
+          maxBoundSouthWest,
+          maxBoundNorthEast,
+          center,
+          polylineArr,
+          hikeId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       dispatch(submittedMap());
       dispatch(appDoneLoading());
     } catch (error) {

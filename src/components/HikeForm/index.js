@@ -12,19 +12,18 @@ import {
   Textarea,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import axios from "axios";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { apiUrl } from "../../config/constants";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { countriesEmoji } from "../../config/countries-emoji";
-import { appDoneLoading, appLoading } from "../../store/appState/actions";
-import { setHikeDetails } from "../../store/form/actions";
-import { selectUser } from "../../store/user/selectors";
+import { submitHike } from "../../store/form/actions";
+import { setHikeFormatAction } from "../../store/hike/actions";
 
 export default function HikeForm(props) {
   const [hikeFormat, setHikeFormat] = useState("loop");
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  useEffect(() => {
+    dispatch(setHikeFormatAction(hikeFormat));
+  });
 
   const form = useForm({
     initialValues: {
@@ -38,49 +37,13 @@ export default function HikeForm(props) {
     },
   });
 
-  async function submitHike(values) {
-    const { title, description, country, seasons, start, end, image } = values;
-    try {
-      dispatch(appLoading());
-      let endLocation;
-      end === "" || hikeFormat === "loop"
-        ? (endLocation = start)
-        : (endLocation = end);
-      const response = await axios.post(`${apiUrl}/hikes/create`, {
-        title,
-        description,
-        countryRef: country,
-        seasonRefs: seasons.map(Number),
-        startLocation: start,
-        endLocation,
-        coverImage: image,
-        userId: user.id,
-      });
-      dispatch(
-        setHikeDetails({
-          hikeId: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-        })
-      );
-      props.nextStep();
-      // dispatch(showMessageWithTimeout("success", true, "auction started"));
-      dispatch(appDoneLoading());
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-        // dispatch(setMessage("danger", true, error.response.data.message));
-      } else {
-        console.log(error.message);
-        // dispatch(setMessage("danger", true, error.message));
-      }
-      dispatch(appDoneLoading());
-    }
-  }
-
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto" pt={30}>
-      <form onSubmit={form.onSubmit((values) => submitHike(values))}>
+      <form
+        onSubmit={form.onSubmit((values) =>
+          dispatch(submitHike(values, props.nextStep()))
+        )}
+      >
         <TextInput
           required
           label="Title"

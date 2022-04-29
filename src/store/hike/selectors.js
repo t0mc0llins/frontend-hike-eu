@@ -37,3 +37,4 @@ export const selectTotalElevation = (reduxState) => {
   }
   return total;
 };
+export const selectHikeFormat = (reduxState) => reduxState.hike.hikeFormat;
