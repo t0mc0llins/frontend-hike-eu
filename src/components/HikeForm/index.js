@@ -119,7 +119,9 @@ export default function HikeForm(props) {
           {...form.getInputProps("image", { withError: false })}
         />
         <Group mt="md">
-          <Button type="submit">Submit</Button>
+          <Button color="green" type="submit">
+            Submit
+          </Button>
         </Group>
       </form>
     </Box>

@@ -60,7 +60,11 @@ export default function CreatePage() {
 
         <Group position="center" mt="xl">
           {active === 1 ? (
-            <Button disabled={mapSubmitted ? false : true} onClick={nextStep}>
+            <Button
+              disabled={mapSubmitted ? false : true}
+              color="green"
+              onClick={nextStep}
+            >
               Next step
             </Button>
           ) : (

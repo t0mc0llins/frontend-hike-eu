@@ -57,6 +57,7 @@ export default function DayForm() {
             />
             <Button
               type="submit"
+              color="green"
               disabled={
                 days.length !== 0 && days[days.length - 1].stages.length === 0
               }

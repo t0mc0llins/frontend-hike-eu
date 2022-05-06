@@ -49,7 +49,13 @@ function App() {
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider
-        theme={{ colorScheme }}
+        theme={{
+          colorScheme,
+          breakpoints: {
+            md: 1050,
+            lg: 1300,
+          },
+        }}
         withGlobalStyles
         withNormalizeCSS
       >

@@ -1,5 +1,12 @@
 import React, { forwardRef, useEffect, useState } from "react";
-import { createStyles, Header, Autocomplete, Group, Text } from "@mantine/core";
+import {
+  createStyles,
+  Header,
+  Autocomplete,
+  Group,
+  Text,
+  Box,
+} from "@mantine/core";
 import { Search } from "tabler-icons-react";
 import { ReactComponent as LogoLight } from "../../images/logo-light.svg";
 import { ReactComponent as LogoDark } from "../../images/logo-dark.svg";
@@ -9,7 +16,7 @@ import { selectSearchableHikes } from "../../store/hike/selectors";
 import { selectToken } from "../../store/user/selectors";
 import LoggedIn from "../LoggedIn";
 import LoggedOut from "../LoggedOut";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { selectDarkMode, selectPage } from "../../store/appState/selectors";
 import { setSearchFilter } from "../../store/filter/actions";
 import { DarkMode } from "../DarkMode";
@@ -93,6 +100,7 @@ export function TopBar({ links }) {
   const page = useSelector(selectPage);
   const dispatch = useDispatch();
   const darkMode = useSelector(selectDarkMode);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setSearchFilter(search));
@@ -104,18 +112,20 @@ export function TopBar({ links }) {
     </a>
   ));
 
-  const AutoCompleteItem = forwardRef(({ value, country, ...others }, ref) => (
-    <div ref={ref} {...others}>
-      <Group noWrap>
-        <div>
-          <Text>{value}</Text>
-          <Text size="xs" color="dimmed">
-            {country}
-          </Text>
-        </div>
-      </Group>
-    </div>
-  ));
+  const AutoCompleteItem = forwardRef(
+    ({ value, country, id, ...others }, ref) => (
+      <Box ref={ref} {...others}>
+        <Group noWrap>
+          <div>
+            <Text>{value}</Text>
+            <Text size="xs" color="dimmed">
+              {country}
+            </Text>
+          </div>
+        </Group>
+      </Box>
+    )
+  );
 
   return (
     <Header className={classes.header}>
@@ -131,13 +141,16 @@ export function TopBar({ links }) {
         </Group>
         <Group>
           <Autocomplete
-            style={{ display: page === "home" ? "block" : "none" }}
+            style={{ display: page === "create" ? "none" : "block" }}
             className={classes.search}
             placeholder="Search"
             value={search}
             onChange={setSearch}
             icon={<Search size={16} />}
             itemComponent={AutoCompleteItem}
+            onItemSubmit={(item) => {
+              navigate(`/hike/${item.id}`);
+            }}
             data={searchData}
             filter={(value, item) =>
               item.value.toLowerCase().includes(value.toLowerCase().trim()) ||

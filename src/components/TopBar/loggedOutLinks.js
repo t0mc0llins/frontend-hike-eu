@@ -1,10 +1,10 @@
 export const loggedOutLinks = [
   {
-    link: "/explore",
+    link: "/",
     label: "Explore",
   },
   {
-    link: "/help",
+    link: "/",
     label: "Help",
   },
 ];

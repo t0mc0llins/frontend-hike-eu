@@ -12,7 +12,7 @@ export const loggedInLinks = [
     label: "Create Hike",
   },
   {
-    link: "/help",
+    link: "/",
     label: "Help",
   },
 ];

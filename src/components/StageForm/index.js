@@ -41,9 +41,8 @@ export default function StageForm() {
       <form onSubmit={form.onSubmit((values) => submitStageForm(values))}>
         <Group position="left" mt="md">
           <TextInput
-            description="Optional, days will be titled stage 1, stage 2 etc by default"
             label="Title"
-            placeholder="day 1"
+            placeholder="stage 1"
             {...form.getInputProps("stageTitle", { withError: false })}
           />
           <Textarea
@@ -81,7 +80,9 @@ export default function StageForm() {
             required
             {...form.getInputProps("endLocation", { withError: false })}
           />
-          <Button type="submit">Save stage</Button>
+          <Button color="green" type="submit">
+            Save stage
+          </Button>
         </Group>
       </form>
     </Box>

@@ -4,6 +4,7 @@ export const selectAllHikes = (reduxState) => reduxState.hike.mainList;
 export const selectSearchableHikes = (reduxState) =>
   reduxState.hike.mainList.map((h) => {
     return {
+      id: h.id,
       value: h.title,
       country: countries.find((c) => c.value === h.countryRef).label,
     };

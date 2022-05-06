@@ -73,7 +73,7 @@ export default function HomePage() {
 
   return (
     <div className="homepage-body" style={{ display: "flex", width: "100%" }}>
-      <Grid pt={20} width={300}>
+      <Grid pt={20} style={{ width: "100%" }}>
         {loading
           ? "Loading"
           : filteredHikes.map((hike) => {
@@ -98,7 +98,7 @@ export default function HomePage() {
                 ? (summaryDescription = `${description.substring(0, 150)}...`)
                 : (summaryDescription = description);
               return (
-                <Grid.Col key={id} sm={6} md={4} lg={3} xl={2}>
+                <Grid.Col key={id} sm={6} md={4} lg={3}>
                   <HikeCard
                     id={id}
                     title={title}
