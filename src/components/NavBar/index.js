@@ -1,6 +1,7 @@
 import { Navbar } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { selectPage } from "../../store/appState/selectors";
+import { CreateInstructions } from "../CreateInstructions";
 import FilterPane from "../FilterPane";
 import { HikeContents } from "../HikeContents";
 
@@ -16,6 +17,7 @@ export default function NavBar() {
     >
       <FilterPane />
       <HikeContents />
+      <CreateInstructions />
     </Navbar>
   );
 }
