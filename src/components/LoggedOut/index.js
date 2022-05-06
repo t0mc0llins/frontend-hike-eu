@@ -10,6 +10,7 @@ import {
   Button,
   Anchor,
   Modal,
+  Space,
 } from "@mantine/core";
 import { useDispatch } from "react-redux";
 import { login, signUp } from "../../store/user/actions";
@@ -33,12 +34,23 @@ export default function LoggedOut() {
 
   return (
     <>
-      <Modal opened={opened} onClose={() => setOpened(false)}>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title={
+          <font size="+2">
+            <strong>Welcome to Hike EU.</strong>
+          </font>
+        }
+        transition="fade"
+        transitionDuration={400}
+        transitionTimingFunction="ease"
+      >
         <Paper radius="md" p="xl" withBorder>
           <Text size="lg" weight={500}>
-            Welcome to Hike EU, please {type}.
+            Please {type}.
           </Text>
-
+          <Space h="md" />
           <form
             onSubmit={
               type === "register"

@@ -118,8 +118,8 @@ export default function HikeForm(props) {
           label="Cover Image"
           {...form.getInputProps("image", { withError: false })}
         />
-        <Group mt="md">
-          <Button color="green" type="submit">
+        <Group mt="md" position="center">
+          <Button color="green" size="md" type="submit">
             Submit
           </Button>
         </Group>

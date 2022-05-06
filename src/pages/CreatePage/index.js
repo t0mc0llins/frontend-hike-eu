@@ -63,6 +63,7 @@ export default function CreatePage() {
             <Button
               disabled={mapSubmitted ? false : true}
               color="green"
+              size="md"
               onClick={nextStep}
             >
               Next step

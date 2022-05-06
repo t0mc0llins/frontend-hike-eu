@@ -102,15 +102,20 @@ function DisplayPosition({ map }) {
     <Group pt={10} pb={10} spacing={50}>
       <Group>
         Latitude: {center.lat.toFixed(4)}, Longitude: {center.lng.toFixed(4)}{" "}
-        <Button color="red" size="xs" onClick={reset}>
+        <Button color="red" variant="outline" size="sm" onClick={reset}>
           Reset
         </Button>{" "}
       </Group>
       <Group position="right" spacing="sm">
-        <Button size="xs" onClick={setMap}>
+        <Button size="sm" variant="outline" onClick={setMap}>
           Set map
         </Button>
-        <Button size="xs" onClick={saveRoute} disabled={!myMap.minZoom}>
+        <Button
+          size="sm"
+          color="green"
+          onClick={saveRoute}
+          disabled={!myMap.minZoom}
+        >
           Save map
         </Button>
       </Group>

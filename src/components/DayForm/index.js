@@ -2,11 +2,14 @@ import {
   ActionIcon,
   Box,
   Button,
+  Divider,
   Group,
+  Space,
   Text,
   Textarea,
   TextInput,
   Title,
+  Tooltip,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
@@ -16,7 +19,7 @@ import { selectShowStageForm } from "../../store/appState/selectors";
 import { submitDay } from "../../store/form/actions";
 import StageForm from "../StageForm";
 import { selectDays } from "../../store/form/selectors";
-import { Trash } from "tabler-icons-react";
+import { Pencil, Trash } from "tabler-icons-react";
 
 export default function DayForm() {
   const dispatch = useDispatch();
@@ -58,6 +61,7 @@ export default function DayForm() {
             <Button
               type="submit"
               color="green"
+              variant="outline"
               disabled={
                 days.length !== 0 && days[days.length - 1].stages.length === 0
               }
@@ -69,18 +73,34 @@ export default function DayForm() {
       </Box>
       {saved ? (
         <Box>
-          <Title>Stages</Title>
+          <Space h="md" />
+          <Divider size="sm" />
+          <Space h="sm" />
+          <Title order={3}>Stages</Title>
+          <Space h="sm" />
           {days[days.length - 1].stages &&
           days[days.length - 1].stages.length !== 0 ? (
             days[days.length - 1].stages.map((s) => {
               return (
-                <Group>
-                  <Text key={s.stageOrder}>
-                    <strong>Stage {s.stageOrder}</strong> - {s.title}
-                  </Text>
-                  <ActionIcon color="red" variant="hover" onClick={() => {}}>
-                    <Trash size={16} />
-                  </ActionIcon>{" "}
+                <Group spacing="xs" key={s.stageOrder}>
+                  <Text>
+                    <strong>Stage {s.stageOrder}</strong>{" "}
+                  </Text>{" "}
+                  — <Text> {s.title}</Text>
+                  <Tooltip label="Edit stage" withArrow>
+                    <ActionIcon
+                      color="yellow"
+                      variant="hover"
+                      onClick={() => {}}
+                    >
+                      <Pencil size={16} />
+                    </ActionIcon>{" "}
+                  </Tooltip>
+                  <Tooltip label="Delete stage" withArrow>
+                    <ActionIcon color="red" variant="hover" onClick={() => {}}>
+                      <Trash size={16} />
+                    </ActionIcon>{" "}
+                  </Tooltip>
                 </Group>
               );
             })
@@ -91,11 +111,17 @@ export default function DayForm() {
             </Text>
           )}
           {stageForm ? (
-            <StageForm />
+            <>
+              <Space h="sm" />
+              <Divider size="xs" />
+              <StageForm />
+            </>
           ) : (
             <Box>
+              <Space h="sm" />
               <Button
                 type="button"
+                variant="outline"
                 onClick={() => {
                   dispatch(showStageForm(true));
                 }}

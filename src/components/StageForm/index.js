@@ -80,7 +80,7 @@ export default function StageForm() {
             required
             {...form.getInputProps("endLocation", { withError: false })}
           />
-          <Button color="green" type="submit">
+          <Button color="green" variant="outline" type="submit">
             Save stage
           </Button>
         </Group>
