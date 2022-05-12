@@ -4,7 +4,7 @@ export const loggedInLinks = [
     label: "Explore",
   },
   {
-    link: "/mytrips",
+    link: "/",
     label: "My Hikes",
   },
   {

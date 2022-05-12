@@ -1,7 +1,9 @@
 import {
+  Center,
   Container,
   Divider,
   Image,
+  Loader,
   Paper,
   Space,
   Text,
@@ -68,7 +70,9 @@ export default function HikePage() {
 
   const map = useSelector(selectCurrentMap);
   return loading || !countries || !hike.days || !hike.days[0].stages ? (
-    "loading"
+    <Center>
+      <Loader />
+    </Center>
   ) : (
     <Container fluid>
       <Paper
@@ -156,7 +160,7 @@ export default function HikePage() {
         </Container>
       </Paper>
       <Container id="map" style={{ height: 800, width: "100%" }}>
-        {!map ? "Loading" : <Map seedData={JSON.parse(map.polylineArr)} />}
+        {!map ? <Loader /> : <Map seedData={JSON.parse(map.polylineArr)} />}
       </Container>
     </Container>
   );
