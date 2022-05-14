@@ -12,10 +12,11 @@ Each hike created using the tools on Hike EU has 3 main components.
 
 ## Creating a hike
 
-### Step 1
 I made a three part wizard to create hikes. A stepper at the top of the page tracks progress.
 
-The first step is to enter the hike summary which will be displayed on the explore page.
+### Step 1
+
+Enter the hike summary which will be displayed on the explore page.
 
 <img src="https://i.imgur.com/sIhK1yr.gif">
 
