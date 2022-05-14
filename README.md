@@ -20,7 +20,7 @@ Enter the hike summary which will be displayed on the explore page.
 
 <img src="https://i.imgur.com/sIhK1yr.gif">
 
-The second step is to create the interactive map.
+### Step 2
 
 The user sets the bounds of the map and then draws the routes on with a polyline tool.
 
