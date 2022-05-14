@@ -16,3 +16,11 @@ I made a three part wizard to create hikes. A stepper at the top of the page tra
 The first step is to enter the hike summary which will be displayed on the explore page.
 
 <img src="https://i.imgur.com/sIhK1yr.gif">
+
+The second step is to create the interactive map.
+
+The user sets the bounds of the map and then draws the routes on with a polyline tool.
+
+Instructions are displayed in the sidebar.
+
+<img src="https://i.imgur.com/SOm3m2Q.gif">
