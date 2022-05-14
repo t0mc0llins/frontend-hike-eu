@@ -38,4 +38,6 @@ A clickable table of contents menu is generated from the day and stage headings
 
 ## Final product!
 
+Albeit a very basic example for the sake of demonstartion.
+
 <img src="https://i.imgur.com/ms68BUH.gif">
