@@ -36,6 +36,6 @@ A clickable table of contents menu is generated from the day and stage headings
 
 <img src="https://i.imgur.com/sKZzntz.gif">
 
-### Final product!
+## Final product!
 
 <img src="https://i.imgur.com/ms68BUH.gif">
