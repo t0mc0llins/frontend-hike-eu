@@ -1,4 +1,3 @@
-# Hike EU
 <img src="https://i.imgur.com/zKCyymJ.png" width="20%">
 This is a site where users can browse hiking routes and post their own trails using interactive mapping and blogging features!
 
