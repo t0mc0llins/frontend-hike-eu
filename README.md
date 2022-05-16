@@ -1,6 +1,6 @@
-<img src="https://i.imgur.com/o3TDntL.png" width="8%"> 
 
-# Hike EU
+
+# Hike EU <img src="https://i.imgur.com/o3TDntL.png" width="8%"> 
 
 This is a site where users can browse hiking routes and post their own trails using interactive mapping and blogging features!
 
