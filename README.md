@@ -2,7 +2,9 @@
 
 # Hike EU 
 
-This is a site where users can browse hiking routes and post their own trails using interactive mapping and blogging features! [Here](https://hike-eu.netlify.app/) is a link to the deployed app.
+This is a site where users can browse hiking routes and post their own trails using interactive mapping and blogging features! 
+
+[Here](https://hike-eu.netlify.app/) is a link to the deployed app. You can login with email: test@test.com and password: test1234 if you would like to try out the hiking route creation features/
 
 Hike EU is a full stack app with the frontend built in React and a [backend](https://github.com/t0mc0llins/backend-hike-eu) that uses NodeJS and Express.
 
