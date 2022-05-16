@@ -2,10 +2,11 @@
 
 # Hike EU 
 
-<img src="https://i.imgur.com/o3TDntL.png" width="8%"> 
 This is a site where users can browse hiking routes and post their own trails using interactive mapping and blogging features!
 
 Hike EU is a full stack app with the frontend built in React and a [backend](https://github.com/t0mc0llins/backend-hike-eu) that uses NodeJS and Express.
+
+<img src="https://i.imgur.com/o3TDntL.png" width="8%"> 
 
 ## Viewing a route
 Each hike created using the tools on Hike EU has 3 main components. 
